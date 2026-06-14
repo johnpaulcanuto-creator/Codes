@@ -1,0 +1,2053 @@
+from tkinter import *
+import tkinter
+import customtkinter as ctk
+from PIL import Image, ImageTk
+import webbrowser
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from datetime import datetime
+from tkinter import messagebox, ttk
+from ttkbootstrap import Style
+
+ctk.set_appearance_mode('dark')
+
+app = ctk.CTk()
+app.title("IT's Mini Library")
+app.state('zoomed')
+app.resizable(False, False)  
+
+def signinpage():
+
+    def signin_button_clicked():
+        
+        username = entry1.get()
+        password = entry2.get()
+
+        users_db = {
+            "johnpaul": "password123",
+            "amiel": "password456",
+            "admin": "adminpassword",
+            "antonneth": "password",
+        }
+        
+        if username in users_db and users_db[username] == password:
+            messagebox.showinfo(title="Login successful", message="You successfully logged in.")
+            homepage()
+        else:
+            messagebox.showerror(title="Login failed", message="Invalid username or password.")
+    def on_enter_pressed(event):
+        signin_button_clicked()
+    app.bind("<Return>", on_enter_pressed)
+    
+    messagebox.showinfo(message= "Welcome to PUP mini Library!")
+    
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+
+    original_image = Image.open('pupcampus.png')
+
+    alpha = 80  #(0-255)
+    transparent_image = original_image.convert("RGBA")
+    data = transparent_image.getdata()
+
+    new_data = []
+    for item in data:
+        new_data.append((item[0], item[1], item[2], alpha))
+
+    transparent_image.putdata(new_data)
+
+    img1 = ImageTk.PhotoImage(transparent_image)
+
+    l1 = ctk.CTkLabel(master=app, image=img1, text="")
+    l1.pack(fill='both', expand=True)  
+
+    frame1 = ctk.CTkFrame(master=app, width=500, height=500, fg_color="#f6efef", corner_radius=5, border_width=5, border_color='#810403')
+    frame1.place(relx=0.7, rely=0.5, anchor=tkinter.CENTER)  
+
+    l2 = ctk.CTkLabel(master=frame1, text="SIGN IN", text_color="#810403", font=('Times New Roman', 40, 'bold'))
+    l2.place(x=175, y=80)
+
+    l3 = ctk.CTkLabel(master=frame1, text="PUP Webmail Account:", text_color="#810403", font=('Times New Roman', 18, 'bold'))
+    l3.place(x=34, y=196)
+
+    entry1 = ctk.CTkEntry(master=frame1, width=250, height=40, fg_color='#810403', placeholder_text="Enter your webmail account", text_color='#fff', font=('Arial', 13, 'bold'))
+    entry1.place(x=220, y=190)
+
+    l4 = ctk.CTkLabel(master=frame1, text="Password:", text_color="#810403", font=('Times New Roman', 18, 'bold'))
+    l4.place(x=135, y=257)
+
+    entry2 = ctk.CTkEntry(master=frame1, width=250, height=40, fg_color='#810403', placeholder_text="Enter your password", show='*', text_color='#fff', font=('Arial', 13, 'bold'))
+    entry2.place(x=220, y=250)
+    
+    button1 = ctk.CTkButton(master=frame1, width=90, height=40, fg_color="#810403", text="Sign In", font=('Times New Roman', 20), corner_radius=5, command=signin_button_clicked)
+    button1.place(x=200, y=313)
+    
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.5, rely=0.1, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+    
+    frame2 = ctk.CTkFrame(master=app, width=102, height=102, fg_color="#fff", corner_radius=5, border_width=5, border_color='#810403')
+    frame2.place(relx=0.28, rely=0.2, anchor=tkinter.CENTER) 
+
+    img2 = Image.open('puplogo.png') 
+    img2 = img2.resize((100, 100)) 
+    img2 = ImageTk.PhotoImage(img2)
+
+    l5 = ctk.CTkLabel(master=frame2, image=img2, text="")
+    l5.place(relx=0.1, rely=0.1, anchor=tkinter.NW) 
+
+    frame3 = ctk.CTkFrame(master=app, width=250, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color='#810403')
+    frame3.place(relx=0.28, rely=0.32, anchor=tkinter.CENTER) 
+
+    l6 = ctk.CTkLabel(master=app)
+    l6 = ctk.CTkLabel(master=frame3, text="IT's Mini Library", text_color="#810403", font=('Times New Roman', 25, 'bold'))
+    l6.place(relx=0.5, rely=0.53, anchor=tkinter.CENTER)
+
+    frame4 = ctk.CTkFrame(master=app, width=399, height=399, fg_color="#f6efef", corner_radius=5, border_width=5, border_color='#810403')
+    frame4.place(relx=0.28, rely=0.63, anchor=tkinter.CENTER)
+
+    l7 = ctk.CTkLabel(master=frame4,
+                      text="""Welcome to PUPPQ 
+    IT’s Mini Library! 
+    It is a hyperlink desktop 
+    application that every BSIT students 
+    of Polytechnic University of the 
+    Philippines Parañaque Campus can 
+    access whether for their education, 
+    interest, and pass time. 
+    It involves 4 basic 
+    programming languages, 
+    which are Python, C++, 
+    JavaScript, and HTML.""",
+                      text_color="#810403", font=('Times New Roman', 24))
+    l7.place(relx=0.48, rely=0.5, anchor=tkinter.CENTER)
+    ###########################----------------------------------------
+
+def homepage():
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    app.state('zoomed')
+    
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+
+    ###########################----------------------------------------
+    frame3 = ctk.CTkScrollableFrame(master=app, width=1000, height=100, fg_color="#cccccc", corner_radius=5)
+    frame3.place(relx=0.5, rely=0.27, anchor=tkinter.CENTER) 
+    information = ["Hello, and welcome to PUPPQ IT's Mini Library! Where you can freely explore, learn, and tackle about the basic programming languages. We provided everything you can first-handedly learn, by roaming through this website you will be able to assess yourself and gain knowledge about the basics you need to know."]
+    text_color="black"
+    for line in information:
+        label = ctk.CTkLabel(master=frame3, text=line, font=('Times New Roman', 30, 'bold'), text_color=text_color, wraplength=1025, anchor="w")
+        label.pack(side=LEFT, pady=5)
+    frame3.update_idletasks()
+    
+    frame4= ctk.CTkFrame(master=app, width=250, height=80, fg_color="#810403")
+    frame4.place(relx=0.5, rely=0.48,anchor=tkinter.CENTER)
+
+    l1 = ctk.CTkLabel(master=frame4, text="Programming", text_color="#fff", font=('Times New Roman', 30,'bold'))
+    l1.place(x=32,y=5)
+    
+    l2 = ctk.CTkLabel(master=frame4, text="Languages", text_color="#fff", font=('Times New Roman', 30,'bold'))
+    l2.place(x=52,y=39)
+
+    button1 = ctk.CTkButton(master=app, width=280, height=70, fg_color="#a61b1a", text="Python", font=('Times New Roman', 35), corner_radius=5, command=python_page)
+    button1.place(relx=0.35,rely=0.6, anchor=tkinter.CENTER)
+
+    img2 = Image.open('python_logo.png')
+    img2 = img2.resize((60, 60))
+    img2 = ImageTk.PhotoImage(img2)
+
+    l3 = ctk.CTkLabel(master=button1, image=img2, text="")
+    l3.place(x=10, y=10, anchor=tkinter.NW) 
+
+    button2 = ctk.CTkButton(master=app, width=280, height=70, fg_color="#a61b1a", text="Javascript", font=('Times New Roman', 35), corner_radius=5, command=javascript_page)
+    button2.place(relx=0.65, rely=0.6, anchor=tkinter.CENTER)
+
+    img3 = Image.open('javascript_logo.png')
+    img3 = img3.resize((60, 60))
+    img3 = ImageTk.PhotoImage(img3)
+
+    l4 = ctk.CTkLabel(master=button2, image=img3, text="")
+    l4.place(x=10, y=10, anchor=tkinter.NW) 
+
+    button3 = ctk.CTkButton(master=app, width=280, height=70, fg_color="#a61b1a", text="C++", font=('Times New Roman', 35), corner_radius=5, command=cpp_page)
+    button3.place(relx=0.35, rely=0.72,anchor=tkinter.CENTER)
+
+    img4 = Image.open('cpp_logo.png')
+    img4 = img4.resize((60, 60))
+    img4 = ImageTk.PhotoImage(img4)
+
+    l5 = ctk.CTkLabel(master=button3, image=img4, text="")
+    l5.place(x=10, y=10, anchor=tkinter.NW) 
+
+    button4 = ctk.CTkButton(master=app, width=280, height=70, fg_color="#a61b1a", text="HTML", font=('Times New Roman', 35), corner_radius=5, command=html_page)
+    button4.place(relx=0.65, rely=0.72,anchor=tkinter.CENTER)
+
+    img5 = Image.open('html_logo.png')
+    img5 = img5.resize((60, 60))
+    img5 = ImageTk.PhotoImage(img5)
+
+    l6 = ctk.CTkLabel(master=button4, image=img5, text="")
+    l6.place(x=10, y=10, anchor=tkinter.NW) 
+
+def python_page():
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+    
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda:homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+
+    frame1 = ctk.CTkFrame(master=app, width=190, height=60, fg_color="#810403", corner_radius=5)
+    frame1.place(relx=0.23, rely=0.1, anchor=tkinter.CENTER)
+
+    img1 = Image.open("python_logo.png")
+    img1 = img1.resize((60, 60))
+    img1 = ImageTk.PhotoImage(img1)
+
+    l1 = ctk.CTkLabel(master=frame1, image=img1, text="")
+    l1.place(relx=0.1, rely=0.1)
+
+    l2 = ctk.CTkLabel(master=frame1, text="Python", text_color='white', font=('Times New Roman', 30, 'bold'))
+    l2.place(relx=0.4, rely=0.17)
+
+    frame2 = ctk.CTkScrollableFrame(master=app, width=1100, height=400, fg_color="#cccccc", corner_radius=5)
+    frame2.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER) 
+    information = [
+    """ Python Overview Python is a widely-used, high-level, general-purpose programming language designed to be easy to read and write. It was developed by Guido van Rossum and first released in 1991. Python is open-source and managed by the Python Software Foundation.
+   
+    Key Features
+        • Readable Syntax: Python uses indentation-based syntax, making it highly readable and less error-prone.
+        • Dynamically Typed: Variables do not need explicit declaration of their types; Python determines the type automatically at runtime.
+        • Interpreted Language: Python code is executed line-by-line, allowing immediate feedback and debugging.
+    Versatile Paradigms: Python supports:
+        Procedural Programming
+        Object-Oriented Programming (OOP)
+        Functional Programming
+            • Third-Party Libraries: Tools for specialized tasks like:
+                -Data Analysis (e.g., Pandas, NumPy)
+                -Machine Learning (e.g., TensorFlow, Scikit-learn)
+                -Web Development (e.g., Flask, Django)
+    Advantages
+        • Beginner-Friendly: Python is often recommended for beginners due to its straightforward syntax.
+        • Cross-Platform: Works on major operating systems like Windows, macOS, and Linux.
+        • Community Support: An active community provides documentation, tutorials, and forums for help.
+        • Scalability: Suitable for small scripts and large-scale applications.
+    Popular Applications
+        • Web Development: Frameworks like Django and Flask make building websites efficient and secure.
+        • Data Science: Tools like Pandas and Matplotlib help analyze and visualize data.
+        • Automation: Automates repetitive tasks like file management or web scraping.
+        • Artificial Intelligence (AI): Used in AI research with libraries like TensorFlow.
+        • Game Development: Pygame enables game creation in Python.
+    Python Versions
+        • Python 2: Legacy version, no longer maintained after January 2020.
+        • Python 3: The current version, with better features and ongoing support.
+    Basic Step-by-Step Python Coding
+    
+    Step 1: Print Hello World 
+        print(\"Hello, World!\")"
+    
+    Step 2: Variables and Data Types
+        name = 'Alice'
+        age = 25
+        height = 5.6
+        print(f"My name is {name}, im {age} years old, and {height} feet tall.
+    
+    Step 3: Conditionals
+        if age>18: 
+        print("you're an adult!)
+        else:
+        print("You're a minor.)
+        
+    Step 4: Loops
+        for i in range(5):
+            print(f"Number:{i}")
+            
+            count = 0
+            while count<5:
+                print(f"Count: {count}")
+                count += 1
+                
+    Step 5: Functions
+        def greet(name):
+        returnf"Hello,{name}!
+               
+        print(greet("Alice))
+        
+    Step 6: Lists and Loops
+        fruits = ["apple", "banana", "cherry"]
+        for fruit in fruits:
+        print(fruit)  
+        Thank You!
+        """   
+    ]
+    text_color="black"
+    for line in information:
+        label = ctk.CTkLabel(master=frame2, text=line, font=('Times New Roman', 18, 'bold'), text_color=text_color, wraplength=1100, compound=LEFT, justify=LEFT, anchor=ctk.W)
+        label.pack(side=LEFT, pady=5)
+    frame2.update_idletasks()
+    
+    def open_hyperlink(url):
+        webbrowser.open(url)
+
+    button2 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Mini Quiz", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=python_quiz_page)
+    button2.place(relx=0.43, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button3 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Information", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.programiz.com/python-programming"))
+    button3.place(relx=0.57, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button4 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="English Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=lambda: open_hyperlink("https://www.youtube.com/watch?v=kqtD5dpn9C8&t=1945s"))
+    button4.place(relx=0.43, rely=0.85, anchor=tkinter.CENTER)
+    
+    button5 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Tagalog Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink('https://www.youtube.com/watch?v=UBZs0-gUZsU&list=PLVnJhHoKgEmpbmB-Lrb2m4wwq5IPgLHnG'))
+    button5.place(relx=0.57, rely=0.85, anchor=tkinter.CENTER)
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+    
+def javascript_page():
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+    
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda:homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+
+    frame1 = ctk.CTkFrame(master=app, width=230, height=60, fg_color="#810403", corner_radius=5)
+    frame1.place(relx=0.23, rely=0.1, anchor=tkinter.CENTER)
+
+    img1 = Image.open("javascript_logo.png")
+    img1 = img1.resize((60, 60))
+    img1 = ImageTk.PhotoImage(img1)
+
+    l1 = ctk.CTkLabel(master=frame1, image=img1, text="")
+    l1.place(x=13, y=5)
+
+    l2 = ctk.CTkLabel(master=frame1, text="Javascript", text_color='white', font=('Times New Roman', 30, 'bold'))
+    l2.place(x=70, y=12)
+
+    frame2 = ctk.CTkScrollableFrame(master=app, width=1100, height=400, fg_color="#cccccc", corner_radius=5)
+    frame2.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER) 
+    information = ["""  JavaScript was created by Brendan Eich in 1995. He developed the language while working at Netscape Communications Corporation. Initially, it was designed to add interactivity to websites and was originally called Mocha, then renamed LiveScript, and finally became JavaScript.Brendan Eich created JavaScript in just 10 days as a lightweight scripting language to run in web browsers, which would complement Java, a more heavyweight programming language. Despite initial skepticism, JavaScript became a core technology of the web, alongside HTML and CSS.It was first released in Netscape Navigator 2.0 browser under the name LiveScript, but it was soon renamed to JavaScript to capitalize on the popularity of Java at the time.
+
+JavaScript is known for being a versatile, high-level programming language primarily used for building interactive and dynamic elements on websites. It allows developers to create features like:
+    
+    1.Interactivity: Adding behaviors like button clicks, form validation, and responsive elements
+    2.Real-time updates: Enabling features like live chat, real-time notifications, and dynamic content updates without refreshing the page (using technologies like AJAX).
+    3.Browser compatibility: Running directly in web browsers, allowing websites to interact with users and external data.
+    4.Web and Mobile Development: Used for both front-end (user interface) and back-end (server-side) development through frameworks like Node.js, and even for mobile app development with tools like React Native.
+    5.Wide Ecosystem: Offering a vast array of libraries and frameworks (e.g., React, Angular, Vue) that simplify development
+
+JavaScript is an essential language for modern web development.JavaScript is a powerful programming language used to create interactive and dynamic content on websites, allowing developers to add features like animations, form validation, and real-time updates.",
+
+JavaScript is considered one of the best starting languages for several reasons:",
+
+    1.Ubiquity on the Web
+        
+        ●Widespread Use: JavaScript is the primary language for client-side web development, meaning it runs in all modern browsers. Almost every interactive website uses JavaScript, which makes learning it highly practical for real-world applications.
+
+    2.Easy to Start
+        
+        ●No Setup Required: Unlike many programming languages that require complex environments or IDEs, JavaScript can be written directly in a simple text editor and run in a browser, making it easy for beginners to start immediately.
+
+    3.Immediate Feedback
+        
+        ●Interactive and Visual: When you write JavaScript code in the browser, you can immediately see the effects on the webpage, whether it's a form validation, animation, or user interaction. This instant feedback helps beginners learn faster and stay motivated.
+
+    4.Versatile Language
+        
+        ●Front-End and Back-End: JavaScript is used not only for front-end development (on the user-facing side of a website) but also for back-end development (on the server side) with technologies like Node.js. This means learning JavaScript can give you the skills to build full-stack applications.
+
+    5.Large Community and Resources
+        
+        ●Support and Documentation: JavaScript has a vast, active community with countless tutorials, forums, and resources available online. Beginners can easily find help, solutions, and educational materials for free.
+
+    6.Cross-Platform
+        
+        ●Web, Mobile, and More: JavaScript is not limited to just browsers. It's used for developing mobile apps (e.g., React Native), server applications (Node.js), desktop applications, and even Internet of Things (IoT) devices.
+
+    7.Great for Learning Programming Concepts
+        
+        ●Learning Core Concepts: JavaScript teaches foundational programming concepts like variables, functions, loops, conditionals, and events, which are transferable to many other programming languages.
+
+    8.Demand in Job Market
+        
+        ●Job Opportunities: JavaScript is in high demand across many industries, as it is essential for building modern websites and applications. Learning JavaScript opens up numerous job opportunities in web development.
+
+
+In summary, JavaScript is beginner-friendly, widely used, and offers plenty of learning resources, making it an ideal first language for those interested in web development or programming in general.
+
+To get started with JavaScript, you'll need to understand the basic structure of the language and how to run your code. Below is a step-by-step guide to coding in JavaScript:
+
+Step 1: Set Up Your Environment
+    You can write JavaScript code using any text editor (e.g., Notepad, VSCode, Sublime Text) and run it in any web browser. Here’s how to get started:
+        
+        1.Text Editor: Open your favorite text editor (e.g., Visual Studio Code, Sublime Text, or even Notepad).
+        2.Web Browser: You’ll use this to view and test your JavaScript code.
+
+Step 2: Basic HTML Structure for JavaScript
+    JavaScript is often embedded within HTML to interact with webpages. Here’s how to structure a basic HTML file to include JavaScript:
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>My First JavaScript</title>
+        </head>
+        <body>
+            <h1>Hello, World!</h1>
+
+            <script>
+                // Your JavaScript code goes here
+                console.log('Hello from JavaScript!');
+            </script>
+        </body>
+        </html>
+
+Key Points:
+
+    ●The <script> tag is used to embed or link JavaScript within the HTML document.
+    ●The console.log() function is used to display output in the browser's developer console.
+
+Step 3: Writing Your First JavaScript Code
+Now that you have a basic HTML structure, let's dive into simple JavaScript concepts. Here’s an explanation of the key JavaScript features to get started.
+
+    1.Variables
+        Variables are used to store data in JavaScript. You can declare a variable using let, const, or var.
+        let message = 'Hello, JavaScript!';
+        console.log(message);  // Outputs: Hello, JavaScript!
+
+    2.Data Types
+        JavaScript supports various data types:
+            ●String: Text (e.g., 'Hello')
+            ●Number: Numeric values (e.g., 123)
+            ●Boolean: true or false
+            ●Array: A collection of values (e.g., [1, 2, 3])
+            ●Object: A collection of key-value pairs (e.g., {name: 'John', age: 30})
+    Example:
+    let name = 'Alice';  // String
+    let age = 25;        // Number
+    let isStudent = true; // Boolean
+    let colors = ['red', 'blue', 'green'];  // Array
+    let person = { name: 'Bob', age: 30 };  // Object
+
+    console.log(name, age, isStudent, colors, person);
+
+    3.Functions
+        Functions are used to group reusable blocks of code.
+    function greet(name) {
+        return 'Hello, ' + name + '!';
+    }
+
+    let greeting = greet('Alice');
+    console.log(greeting);  // Outputs: Hello, Alice!
+
+    4.Conditionals
+        You can make decisions in your code using if, else, and else if.
+    let age = 20;
+
+    if (age >= 18) {
+        console.log('You are an adult!');
+    } else {
+        console.log('You are a minor!');
+    }
+
+    5.Loops
+        Loops allow you to repeat a block of code multiple times. Here’s an example using a for loop:
+    for (let i = 0; i < 5; i++) {
+        console.log('Number: ' + i);
+    }
+
+    6.Events
+        JavaScript is great for handling events like clicks or key presses. For example, you can listen for a button click:
+    <button id="myButton">Click Me</button>
+
+    <script>
+        document.getElementById('myButton').addEventListener('click', function() {
+            alert('Button was clicked!');
+        });
+    </script>
+
+Step 4: Save and Test Your JavaScript Code
+
+    1.Save your file: After writing your JavaScript code within the <script> tag in the HTML file, save the file with a .html extension (e.g., index.html).
+    2.Open the file in a browser: Open the saved .html file in any web browser (like Chrome, Firefox, or Edge). The JavaScript code will run and any output (such as console.log()) can be viewed in the browser's developer tools console.
+    Example: Complete Simple JavaScript Program
+    Here’s an example combining everything you've learned so far:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JavaScript Basics</title>
+    </head>
+    <body>
+        <h1>Click the button to see an alert</h1>
+        <button id="alertButton">Click Me</button>
+
+        <script>
+            // Define a function
+            function showMessage() {
+                alert('Hello, you clicked the button!');
+            }
+
+            // Event listener for the button click
+            document.getElementById('alertButton').addEventListener('click', showMessage);
+        </script>
+    </body>
+    </html>
+
+Step 5: Keep Practicing and Learning
+    The more you practice writing JavaScript code, the better you’ll become. Here are a few ways to continue learning:  
+    
+    ●Try building small interactive web pages or games.
+    ●Learn about JavaScript libraries and frameworks like React or Vue.
+    ●Explore more advanced topics like asynchronous programming (using async/await), JavaScript's Document Object Model (DOM), and AJAX.
+
+JavaScript is a powerful language, and by building on your foundation, you can create complex applications.
+Thank You!"""
+    ]
+    text_color="black"
+    for line in information:
+        label = ctk.CTkLabel(master=frame2, text=line, font=('Times New Roman', 18, 'bold'), text_color=text_color, wraplength=1100, compound=LEFT, justify=LEFT, anchor=ctk.W)
+        label.pack(side=LEFT, pady=5)
+    frame2.update_idletasks()
+    
+    def open_hyperlink(url):
+        webbrowser.open(url)
+
+    button2 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Mini Quiz", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=javascript_quiz_page)
+    button2.place(relx=0.43, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button3 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Information", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.geeksforgeeks.org/javascript/?fbclid=IwZXh0bgNhZW0CMTAAAR0MR0HieDNhZ6qIch5Fgus29oYO9c8ePYIEjlwKGbTaKuel8JCpbgt8VKA_aem_AiVaFtUesFFuAQY8tzL-0A"))
+    button3.place(relx=0.57, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button4 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="English Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=lambda: open_hyperlink("https://www.youtube.com/watch?v=EfAl9bwzVZk"))
+    button4.place(relx=0.43, rely=0.85, anchor=tkinter.CENTER)
+    
+    button5 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Tagalog Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.youtube.com/watch?v=V01uCwftQ5o&list=PLVnJhHoKgEmp5SRFPKsy61BeWozI3mwcV"))
+    button5.place(relx=0.57, rely=0.85, anchor=tkinter.CENTER)
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+    
+def cpp_page():
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda:homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+
+    frame1 = ctk.CTkFrame(master=app, width=150, height=60, fg_color="#810403", corner_radius=5)
+    frame1.place(relx=0.23, rely=0.1, anchor=tkinter.CENTER)
+
+    img1 = Image.open("cpp_logo.png")
+    img1 = img1.resize((60, 60))
+    img1 = ImageTk.PhotoImage(img1)
+
+    l1 = ctk.CTkLabel(master=frame1, image=img1, text="")
+    l1.place(x=13, y=5)
+
+    l2 = ctk.CTkLabel(master=frame1, text="C++", text_color='white', font=('Times New Roman', 30, 'bold'))
+    l2.place(x=70, y=13)
+
+    frame2 = ctk.CTkScrollableFrame(master=app, width=1100, height=400, fg_color="#cccccc", corner_radius=5)
+    frame2.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER) 
+    information = ["""C++ Overview
+
+C++ is a high-performance, general-purpose programming language developed by Bjarne Stroustrup at Bell Labs in 1983. It extends the C programming language by introducing object-oriented programming (OOP) features. Known for its efficiency and control, C++ is widely used in system software, game development, and applications requiring high performance.
+
+Key Features
+
+    •Object-Oriented Programming (OOP): Supports classes, objects, inheritance, polymorphism, encapsulation, and abstraction.
+    •High Performance: Ability to manage low-level memory operations makes it suitable for resource-intensive tasks.
+    •Statically Typed: Variable types are declared explicitly at compile time, enabling early error detection.
+    •Standard Template Library (STL): A collection of ready-to-use templates for data structures (like vectors, lists, and maps) and algorithms (like sorting and searching).
+    •Backward Compatibility: Backward-compatible with C, allowing C code to be easily incorporated.
+    •Portability: Programs can run on various platforms with minimal code changes.
+
+Advantages
+
+    •Control Over Hardware: Provides low-level memory management through pointers and direct hardware access.
+    •Efficiency: Ideal for real-time systems where speed is critical.
+    •Rich Ecosystem: Includes compilers like GCC and MSVC and numerous libraries for graphics, networking, and more.
+
+Popular Applications
+
+    •System Software: Operating systems, drivers, and embedded systems.
+    •Game Development: Popular game engines like Unreal Engine use C++ for its speed and flexibility.
+    •Database Systems: Databases like MySQL are written in C++.
+    •Scientific Computing: Applications requiring high performance and precision.
+
+C++ Standards
+
+    •C++98: The first standardized version.
+    •C++11: Introduced modern features like smart pointers and lambda expressions.
+    •C++17 and C++20: Added features like structured bindings, concepts, and ranges for enhanced usability.
+
+Basic Step-by-Step C++ Coding
+
+Step 1: Hello World Program
+
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        cout << "Hello, World!" << endl;
+        return 0;
+    }
+
+Step 2: Variables and Data Types
+
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        string name = "Alice";
+        int age = 25;
+        float height = 5.6;
+
+        cout << "Name: " << name << ", Age: " << age << ", Height: " << height << endl;
+        return 0;
+    }
+
+Step 3: Conditionals
+
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        int age = 20;
+
+        if (age > 18) {
+            cout << "You're an adult!" << endl;
+        } else {
+            cout << "You're a minor." << endl;
+        }
+        return 0;
+    }
+
+Step 4: Loops
+
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        for (int i = 0; i < 5; i++) {
+            cout << "Number: " << i << endl;
+        }
+
+        int count = 0;
+        while (count < 5) {
+            cout << "Count: " << count << endl;
+            count++;
+        }
+        return 0;
+    }
+
+Step 5: Functions
+
+    #include <iostream>
+    using namespace std;
+
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int main() {
+        cout << "Sum: " << add(5, 10) << endl;
+        return 0;
+    }
+
+Step 6: STL Example (Vector)
+
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+
+    int main() {
+        vector<int> numbers = {1, 2, 3, 4, 5};
+
+        for (int num : numbers) {
+            cout << num << " ";
+        }
+        cout << endl;
+
+        return 0;
+    }
+    
+Thank You!"""
+    ]
+    text_color="black"
+    for line in information:
+        label = ctk.CTkLabel(master=frame2, text=line, font=('Times New Roman', 18, 'bold'), text_color=text_color, wraplength=1100, compound=LEFT, justify=LEFT, anchor=ctk.W)
+        label.pack(side=LEFT, pady=5)
+    frame2.update_idletasks()
+    
+    def open_hyperlink(url):
+        webbrowser.open(url)
+
+    button2 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Mini Quiz", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=cpp_quiz_page)
+    button2.place(relx=0.43, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button3 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Information", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.geeksforgeeks.org/c-plus-plus/?fbclid=IwZXh0bgNhZW0CMTAAAR1jRxITF5mbaOZkH9H0IN7VQzYSMJSFx6Lg068mSeLhngnlCOC7wgP3wI8_aem_1ZVqtOmgayMUml8aaja7Bg"))
+    button3.place(relx=0.57, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button4 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="English Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=lambda: open_hyperlink("https://www.youtube.com/watch?v=ZzaPdXTrSb8"))
+    button4.place(relx=0.43, rely=0.85, anchor=tkinter.CENTER)
+    
+    button5 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Tagalog Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.youtube.com/watch?v=te1eLWfdd0I&list=PLcy9FxoGhuPkqJ-PbBP7XiOR1IZ8-hg-A"))
+    button5.place(relx=0.57, rely=0.85, anchor=tkinter.CENTER)
+    
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+    
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+
+def html_page():
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda:homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+
+    frame1 = ctk.CTkFrame(master=app, width=190, height=60, fg_color="#810403", corner_radius=5)
+    frame1.place(relx=0.23, rely=0.1, anchor=tkinter.CENTER)
+
+    img1 = Image.open("html_logo.png")
+    img1 = img1.resize((60, 60))
+    img1 = ImageTk.PhotoImage(img1)
+
+    l1 = ctk.CTkLabel(master=frame1, image=img1, text="")
+    l1.place(x=13, y=5)
+
+    l2 = ctk.CTkLabel(master=frame1, text="HTML", text_color='white', font=('Times New Roman', 30, 'bold'))
+    l2.place(x=70, y=13)
+
+    frame2 = ctk.CTkScrollableFrame(master=app, width=1100, height=400, fg_color="#cccccc", corner_radius=5)
+    frame2.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER) 
+    information = ["""  HTML, or HyperText Markup Language, is the standard language used for creating and structuring content on the web, enabling developers to design and organize text, images, links, and other multimedia elements by utilizing a series of tags and attributes, which are interpreted by web browsers to display the content in an organized and visually appealing manner, while also allowing for the integration of various programming languages, such as JavaScript and CSS, to enhance the interactivity and styling of web pages. HTML (HyperText Markup Language) was created by Tim Berners-Lee, a British computer scientist, in 1991. He developed HTML as a way to structure and display documents on the World Wide Web, along with the HTTP protocol and the first web browser, making it easier for people to access and share information online.
+HTML, or HyperText Markup Language, is the standard language used for creating and structuring content on the web, enabling developers to design and organize text, images, links, and other multimedia elements by utilizing a series of tags and attributes, which are interpreted by web browsers to display the content in an organized and visually appealing manner, while also allowing for the integration of various programming languages, such as JavaScript and CSS, to enhance the interactivity and styling of web pages
+
+HTML is considered one of the best starting points for learning programming for several reasons:
+
+    1.Simplicity: HTML is straightforward and easy to learn for beginners. It uses a system of simple tags to structure content, which makes it less complex compared to other programming languages that involve intricate syntax and logic.
+    2.Foundation for Web Development: HTML is the foundation for creating websites and web applications. Learning HTML gives beginners a strong base for understanding how websites work and allows them to move on to more complex technologies like CSS, JavaScript, and backend programming
+    3.Instant Results: When you write HTML, you can immediately see the results in a web browser. This provides instant feedback, which is motivating and helps beginners understand how their code translates to real-world applications.
+    4.Low Barrier to Entry: HTML doesn't require prior knowledge of complex programming concepts like algorithms or object-oriented programming, making it accessible for anyone interested in learning to code.
+    4.Cross-Platform: HTML is supported by all web browsers, making it universally applicable and easy to practice across various devices and platforms.
+    5.Complementary to Other Skills: HTML is a foundational skill that pairs well with other languages and tools such as CSS (for styling) and JavaScript (for interactivity). Mastering HTML opens up opportunities to learn full-stack web development.
+
+
+Overall, HTML is a beginner-friendly introduction to the world of programming and provides valuable skills for web development and other areas in tech.
+
+
+To start coding in HTML (HyperText Markup Language), it's essential to understand the basic structure and syntax. Below is a step-by-step guide to help you get started with HTML:
+
+Step 1: Set Up Your Environment
+To write HTML code, you only need a text editor (like Notepad on Windows or TextEdit on macOS) and a web browser (like Chrome or Firefox). You’ll be writing code in the text editor and viewing the result in the browser.
+    1.Text Editor: Open Notepad (Windows) or TextEdit (macOS), or you can download and install a code editor like Visual Studio Code
+    2.	
+    3.Web Browser: You'll use this to view your HTML files.
+
+Step 2: Basic HTML Structure
+HTML uses tags to structure content. Every HTML document begins with a basic structure:
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Webpage Title</title>
+    </head>
+    <body>
+        <!-- Your content goes here -->
+    </body>
+    </html>
+
+Explanation:
+
+    ●<!DOCTYPE html>: Tells the browser that this is an HTML5 document.
+    ●<html>: The root element that wraps all HTML content.
+    ●<head>: Contains metadata, including the character set (<meta charset="UTF-8">), the viewport settings for mobile responsiveness, and the title of the page (<title>).
+    ●<body>: This section contains the actual content that is displayed in the browser.
+
+Step 3: Adding Headings and Paragraphs
+    To add headings, paragraphs, and text, use the following tags:
+    Headings:
+        HTML supports six levels of headings. They range from <h1> to <h6>, where <h1> is the largest and <h6> is the smallest.
+        <h1>This is a Heading 1</h1>
+        <h2>This is a Heading 2</h2>
+        <h3>This is a Heading 3</h3>
+        <h4>This is a Heading 4</h4>
+        <h5>This is a Heading 5</h5>
+        <h6>This is a Heading 6</h6>
+
+Paragraphs:
+    To add paragraphs, use the <p> tag:
+    <p>This is a paragraph of text.</p>
+
+Step 4: Adding Links
+To add hyperlinks to other pages or websites, use the <a> tag with the href attribute:
+
+    <a href="https://www.example.com">Visit Example Website</a>
+
+Step 5: Adding Images
+To add an image, use the <img> tag with the src (source) and alt (alternative text) attributes:
+    
+    <img src="image.jpg" alt="A description of the image">
+
+Step 6: Adding Lists
+You can create two types of lists in HTML: unordered (bulleted) and ordered (numbered).
+Unordered List (Bullets):
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+
+    Ordered List (Numbered):
+    <ol>
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+    </ol>
+
+Step 7: Adding Tables
+To create a table, use the following tags:
+    ● <table>: Defines the table.
+    ● <tr>: Defines a table row.
+    ● <td>: Defines a table cell.
+    ● <th>: Defines a table header.
+Example:
+    <table border="1">
+        <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+        </tr>
+        <tr>
+            <td>Row 1, Cell 1</td>
+            <td>Row 1, Cell 2</td>
+        </tr>
+        <tr>
+            <td>Row 2, Cell 1</td>
+            <td>Row 2, Cell 2</td>
+        </tr>
+    </table>
+
+Step 8: Save and View Your HTML File
+    1.Save your file: After writing your HTML code, save the file with the .html extension (e.g., index.html).
+    2.Open the file in a browser: Double-click the file, and it will open in your default web browser.
+Example HTML File:
+Here's an example of a basic HTML page:
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My First Webpage</title>
+    </head>
+    <body>
+        <h1>Welcome to My Webpage</h1>
+        <p>This is a paragraph about my webpage.</p>
+        <a href="https://www.example.com">Visit Example Website</a>
+        
+        <h2>My Favorite Fruits</h2>
+        <ul>
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Orange</li>
+        </ul>
+
+        <h3>Image Example</h3>
+        <img src="image.jpg" alt="A beautiful scenery">
+
+        <h3>My Table</h3>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>Alice</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>Bob</td>
+                <td>30</td>
+            </tr>
+        </table>
+    </body>
+    </html>
+
+Step 9: Continue Learning
+To build more complex web pages, you’ll need to learn about other HTML tags, attributes, and how to style your content with CSS (Cascading Style Sheets). As you progress, you may also explore JavaScript to add interactivity to your pages.
+This is just the beginning! HTML is simple to start with, and you can gradually build your skills over time.
+
+Thank You!"""
+    ]
+    text_color="black"
+    for line in information:
+        label = ctk.CTkLabel(master=frame2, text=line, font=('Times New Roman', 18, 'bold'), text_color=text_color, wraplength=1100, compound=LEFT, justify=LEFT, anchor=ctk.W)
+        label.pack(side=LEFT, pady=5)
+    frame2.update_idletasks()
+    
+    def open_hyperlink(url):
+        webbrowser.open(url)
+
+    button2 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Mini Quiz", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=html_quiz_page)
+    button2.place(relx=0.43, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button3 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Information", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.geeksforgeeks.org/html-tutorial/?fbclid=IwZXh0bgNhZW0CMTAAAR17zGy3ySLLnwsky7T0pc4XjKBOq-3OGznO7Zm-yWfTQcQjkoS0whiqRv8_aem_d-crxIfEMLF9hodalCKQVA"))
+    button3.place(relx=0.57, rely=0.76, anchor=tkinter.CENTER) 
+    
+    button4 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="English Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command=lambda: open_hyperlink("https://www.youtube.com/watch?v=kUMe1FH4CHE"))
+    button4.place(relx=0.43, rely=0.85, anchor=tkinter.CENTER)
+    
+    button5 = ctk.CTkButton(master=app, width=170, height=55, fg_color='#810403', text="Tagalog Tutorials", text_color='white', font=('Times New Roman', 20, 'bold'), corner_radius=5, command= lambda: open_hyperlink("https://www.youtube.com/watch?v=29l2qxSJSIw&list=PLVnJhHoKgEmoQ_6hXCKNDa2zTlzu5xe4k"))
+    button5.place(relx=0.57, rely=0.85, anchor=tkinter.CENTER)
+    
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+    
+def send_feedback_to_email(name, comment, additional_emails=None):
+    # Email credentials
+    sender_email = "pupminilib@gmail.com"  
+    sender_password = "mjrrkgsbomecerqe" 
+    receiver_emails= ["canutopauljohn@gmail.com", "antonneth.sarmiento.student@gmail.com"]
+    if additional_emails:
+        receiver_emails.extend(additional_emails)  
+
+    try:
+        # Create email
+        subject = f"Feedback from {name}" if name else "Feedback Received"
+        body = f"Name: {name}\n\nFeedback:\n{comment}"
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = ",".join(receiver_emails)
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain'))
+
+        # Connect to Gmail's SMTP server
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()  # Start TLS encryption
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, receiver_emails, msg.as_string())
+        server.quit()
+
+        print("Feedback sent successfully!")
+    except Exception as e:
+        print("Failed to send feedback:", e)
+        
+def feedback_page():
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda:homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+    
+    frame1 = ctk.CTkFrame(app, width=300, height=80, fg_color='#810403', corner_radius=5)
+    frame1.place(relx= 0.5, rely=0.1, anchor=tkinter.CENTER)
+    
+    l1 = ctk.CTkLabel(frame1, text="FEEDBACK", font=('Times New Roman', 50), text_color='white')
+    l1.place(x=20, y=10)
+    
+    frame2 = ctk.CTkFrame(app, width=70, height=30, fg_color="#810403", corner_radius=5)
+    frame2.place(relx=0.23, rely=0.24, anchor=tkinter.CENTER)
+    
+    name_label = ctk.CTkLabel(frame2, text="Name", font=('Times New Roman', 20, 'bold'), text_color="white")
+    name_label.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER)
+    
+    name_entry = ctk.CTkEntry(app, width=300, height=40, text_color="black", fg_color='#cccccc', font=('Times New Roman', 15))
+    name_entry.place(relx=0.3, rely=0.29, anchor=tkinter.CENTER)
+
+    frame3 = ctk.CTkFrame(app, width=100, height=30, fg_color="#810403", corner_radius=5)
+    frame3.place(relx=0.24, rely=0.34, anchor=tkinter.CENTER)
+    
+    comment_label = ctk.CTkLabel(frame3, text="Comments", font=('Times New Roman', 20, 'bold'), text_color="white")
+    comment_label.place(relx=0.5, rely=0.45, anchor=tkinter.CENTER)
+    
+    commentframe = ctk.CTkTextbox(app, width=900, height=300, text_color="black", fg_color='#cccccc', font=('Times New Roman', 15), corner_radius=5)
+    commentframe.place(relx=0.5, rely=0.54, anchor=tkinter.CENTER)
+    
+    def submit_feedback():
+        name = name_entry.get().strip()
+        comment = commentframe.get("1.0", tkinter.END).strip()
+        if name and comment:
+            send_feedback_to_email(name, comment)
+            name_entry.delete(0, tkinter.END)
+            commentframe.delete("1.0", tkinter.END) 
+            messagebox.showinfo(message="Thank you for your feedback.")
+        else:
+            messagebox.showinfo(message="Incomplete form, Please fill in both your name and comments.")
+
+    button1 = ctk.CTkButton(app, width=100, height=50, fg_color="#810403", text="SUBMIT", font=('Times New Roman', 20, 'bold'), corner_radius=5, command=submit_feedback)
+    button1.place(relx=0.46, rely=0.75)
+    def on_enter_pressed(event):
+        submit_feedback()
+    app.bind('<Return>', on_enter_pressed)
+    
+def log_out():
+    for widget in app.winfo_children():
+        widget.destroy()
+    print("User logged out")
+    show_signin_page()
+    
+def show_signin_page():
+    signinpage()
+    
+python_quiz_data = [
+    {
+        "question": "Who developed Python, and which organization manages it now?",
+        "choices": ["A. Dennis Ritchie; Open Source Initiative", "B. Guido van Rossum; Python Software Foundation", "C. James Gosling; Oracle Corporation", "D. Linus Torvalds; Linux Foundation"],
+        "answer": "B. Guido van Rossum; Python Software Foundation",
+    },
+    {
+        "question": "What year was Python first released?",
+        "choices": ["A. 1989", "B. 1991", "C. 1995", "D. 2000"],
+        "answer": "B. 1991",
+    },
+    {
+        "question": "What is Python's default data type for a number with decimals?",
+        "choices": ["A. int", "B. float", "C. double", "D. str"],
+        "answer": "B. float",
+    },
+    {
+        "question": "How do you convert a number to a string in Python?",
+        "choices": ["A.str()", "B.int()", "C.float()", "D.bool()"],
+        "answer": "A.str()",
+    },
+    {
+        "question": "Which library is commonly used for data visualization in Python?",
+        "choices": ["A. NumPy", "B. TensorFlow", "C. Matplotlib", "D. Flask"],
+        "answer": "C. Matplotlib",
+    },
+    {
+        "question": "6. What is a Python list?",
+        "choices": [
+            "A. A sequence of immutable elements.",
+            "B. A sequence of mutable elements",
+            "C. A built-in method in Python.",
+            "D. A fixed-size data structure.",
+        ],
+        "answer": "B. A sequence of mutable elements.",
+    },
+    {
+        "question": "7. What is the result of the code x = 10 x+=5 print(x)?",
+        "choices": [
+            "A. 10",
+            "B. 15",
+            "C. Error",
+            "D. 5",
+        ],
+        "answer": "B. 15",
+    },
+    {
+        "question": "What is the purpose of the return statement in Python functions?",
+        "choices": ["A. To define a function", "B. To exit a loop", "C. To output a value from a function", "D. None of the above"],
+        "answer": "C. To output a value from a function.",
+    },
+    {
+        "question": "What is Python's primary use in artificial intelligence (AI)?",
+        "choices": [
+            "A. File handling",
+            "B. Automation",
+            "C. Libraries like TensorFlow for AI research",
+            "D. Game development",
+        ],
+        "answer": "C. Libraries like TensorFlow for AI research",
+    },
+    {
+        "question": "Which of the following is an example of Python's indentation rule?",
+        "choices": ["A. Using braces to define code blocks.", "B. Using tabs or spaces to define code blocks.", "C. Ignoring spaces entirely.", "D. Requiring a special character to mark code blocks."],
+        "answer": "B. Using tabs or spaces to define code blocks",
+    },
+]
+
+javascript_quiz_data = [
+    {
+        "question": "Which symbol is used to declare a variable in JavaScript?",
+        "choices": ["A. #", "B. @", "C. let", "D. &"],
+        "answer": "C. let",
+    },
+    {
+        "question": "Which of the following will display an alert message in JavaScript?",
+        "choices": ["A. console.log()", " B. prompt()", "C. alert()", "D. print()"],
+        "answer": "C. alert()",
+    },
+    {
+        "question": 'What does console.log("Hello World") do in JavaScript?',
+        "choices": ["A. It prints 'Hello World' on the webpage", "B. It displays 'Hello World' in the browsers console", "C. It sends 'Hello World' as a message to the user", "D. It saves 'Hello World' to a file"],
+        "answer": "B. It displays 'Hello World' in the browsers console",
+    },
+    {
+        "question": "Which one of these is a valid JavaScript variable name?",
+        "choices": ["A. 1variable", "B. @variable", "C. variable1", " D. variable name"],
+        "answer": "C. variable1",
+    },
+    {
+        "question": "Which of the following is the correct syntax for a JavaScript function?",
+        "choices": ["A. function = myFunction() {}", "B. function myFunction() {}", "C. def myFunction() {}", "D. function: myFunction() {}"],
+        "answer": "B. function myFunction() {}",
+    },
+    {
+        "question": "What is the output of this code? let x = 5; console.log(x);",
+        "choices": [
+            "A. 5",
+            "B. x",
+            "C. undefined",
+            "D. NaN",
+        ],
+        "answer": "A. 5",
+    },
+    {
+        "question": "Which keyword is used to define a constant value in JavaScript?",
+        "choices": [
+            "A. var",
+            "B. let",
+            "C. const",
+            "D. constant",
+        ],
+        "answer": "C. const",
+    },
+    {
+        "question": "Which of the following is the correct way to write a comment in JavaScript?",
+        "choices": ["A. // This is a comment", "B. /* This is a comment */", "C. # This is a comment", "D. Both a and b."],
+        "answer": "D. Both a and b",
+    },
+    {
+        "question": "What does typeof operator do in JavaScript?",
+        "choices": [
+            "A. It checks the type of a variable",
+            "B. It changes the type of a variable",
+            "C. It defines a new variable",
+            "D. It compares two variables",
+        ],
+        "answer": "A. It checks the type of a variable",
+    },
+    {
+        "question": "What is the correct way to write a string in JavaScript?",
+        "choices": ["A. Hello World", 'B. "Hello World"', "C. 'Hello World'", "D. Both b and c"],
+        "answer": "D. Both b and c",
+    },
+]
+
+cpp_quiz_data = [
+    {
+        "question": "Who developed C++, and in what year was it introduced?",
+        "choices": ["A. Dennis Ritchie; 1972", "B. Bjarne Stroustrup; 1983", "C. James Gosling; 1995", "D. Linus Torvalds; 1991"],
+        "answer": "B. Bjarne Stroustrup; 1983",
+    },
+    {
+        "question": "What is the relationship between C and C++ in terms of compatibility?",
+        "choices": ["A. C++ is entirely independent of C", "B. C++ is a superset of C, offering backward compatibility.", "C. C++ does not support any features of C", "D. C++ replaces C entirely without compatibility"],
+        "answer": "B. C++ is a superset of C, offering backward compatibility",
+    },
+    {
+        "question": "What feature allows C++ to manage low-level memory?",
+        "choices": ["A. Garbage collection", "B. Pointers", "C. Dynamic typing", "D. STL"],
+        "answer": "B. Pointers",
+    },
+    {
+        "question": "What is the purpose of the return statement in a C++ function?",
+        "choices": ["A. To define a function", "B. To exit the function and optionally return a value", "C. To declare a function", "D. To indicate errors"],
+        "answer": "B. To exit the function and optionally return a value",
+    },
+    {
+        "question": "Which of the following is a key feature of C++'s STL?",
+        "choices": ["A. Automatic garbage collection", "B. Predefined data structures and algorithms", "C. Machine learning libraries", "D. Real-time debugging tools"],
+        "answer": "B. Predefined data structures and algorithms",
+    },
+    {
+        "question": "What is the output of the following code snippet? int a = 10,b = 20; cout<<a+b<<endl;",
+        "choices": [
+            "A. 10",
+            "B. 20",
+            "C. 30",
+            "D. Error",
+        ],
+        "answer": "C. 30",
+    },
+    {
+        "question": "Which C++ standard introduced lambda expressions?",
+        "choices": [
+            "A. C++98",
+            "B. C++11",
+            "C. C++17",
+            "D. C++20",
+        ],
+        "answer": "B. C++11",
+    },
+    {
+        "question": "Why is C++ commonly used for game development?",
+        "choices": ["A. It is dynamically typed", "B. It offers high performance and direct hardware control", "C. It is easy to learn for beginners", "D. It supports cloud integration."],
+        "answer": "B. It offers high performance and direct hardware control",
+    },
+    {
+        "question": "9.	What is the result of this code? for (int i = 1; i <= 3; i++) { cout << i * i << " "; }",
+        "choices": [
+            "A. 1 2 3",
+            "B. 1 4 9",
+            "C. 2 4 6",
+            "D. None of the above",
+        ],
+        "answer": "B. 1 4 9",
+    },
+    {
+        "question": "What is the purpose of the #include directive?",
+        "choices": ["A. To include user input", "B. To import standard or user-defined libraries", "C. To define functions", "D. To create loops"],
+        "answer": "B. To import standard or user-defined libraries",
+    },
+]
+
+html_quiz_data = [
+    {
+        "question": "What does HTML stand for?",
+        "choices": ["A. HyperText Markup Language", "B. High-Tech Machine Language", "C. Hyper Transfer Media Language", "D. HyperText Management Language"],
+        "answer": "A. HyperText Markup Language",
+    },
+    {
+        "question": "What is the purpose of HTML in web development?",
+        "choices": ["A. To create and structure content on the web", " B. To design the layout and appearance of web pages", "C. To add interactivity and animations to a website", "D. To store data and manage databases"],
+        "answer": "A. To create and structure content on the web",
+    },
+    {
+        "question": 'What are HTML tags and why are they important?',
+        "choices": ["A. HTML tags are used to style web pages and they are essential for adding colors.", "B. HTML tags are special characters that make web pages secure and they are essential for website encryption", "C. HTML tags are used to define the structure and content of a web page, and they are important because they help browsers display the content correctly", "D. HTML tags are used to store data in a website, and they are important for database management"],
+        "answer": "C. HTML tags are used to define the structure and content of a web page, and they are important because they help browsers display the content correctly",
+    },
+    {
+        "question": "What is the difference between an opening tag and a closing tag in HTML?",
+        "choices": ["A. The opening tag starts an HTML element, while the closing tag ends it.", "B. The opening tag defines the content, and the closing tag is used for styling", "C. The opening tag is optional, but the closing tag is required.", " D. The opening tag is used for links, and the closing tag is used for images"],
+        "answer": "A. The opening tag starts an HTML element, while the closing tag ends it.",
+    },
+    {
+        "question": "What is the role of the <head> tag in an HTML document?",
+        "choices": ["A. It contains the main content of the webpage that is displayed to users", "B. It defines the structure of the webpage, including headings and paragraphs", "C. It holds meta-information, links to stylesheets, and scripts that are not visible to users", "D. It is used to add images and media files to the page"],
+        "answer": "C. It holds meta-information, links to stylesheets, and scripts that are not visible to users",
+    },
+    {
+        "question": "In what year html was created?",
+        "choices": [
+            "A. 1985",
+            "B. 1991",
+            "C. 1995",
+            "D. 2000",
+        ],
+        "answer": "B. 1991",
+    },
+    {
+        "question": "Who created HyperText Markup Language?",
+        "choices": [
+            "A. Bill Gates",
+            "B. Mark Zuckerberg",
+            "C. Tim Berners-Lee",
+            "D. Larry Page",
+        ],
+        "answer": "C. Tim Berners-Lee",
+    },
+    {
+        "question": "What is HTML and what is its purpose in web development?",
+        "choices": ["A. A programming language used to create websites.", "B. A markup language used to structure web content.", "C. A database language used for storing data.", "D. A tool for designing graphics for websites."],
+        "answer": "B. A markup language used to structure web content.",
+    },
+    {
+        "question": "How do you create an ordered list in HTML?",
+        "choices": [
+            "A. <list> <item>First</item> </list>",
+            "B. <ol> <li>First item</li> </ol>",
+            "C. <ul> <li>First item</li> </ul>",
+            "D. <order> <li>First item</li> </order>",
+        ],
+        "answer": "B. <ol> <li>First item</li> </ol>",
+    },
+    {
+        "question": "What is the role of the <title> tag in an HTML document?",
+        "choices": ["A. It defines the main content of the webpage.", "B. It sets the title that appears in the browser's tab or title bar.", "C. It styles the webpage content", "D. It specifies the font size of the webpage"],
+        "answer": "B. It sets the title that appears in the browser's tab or title bar.",
+    },
+]
+
+python_score = 0
+python_current_question = 0
+python_chc_buttons = []
+python_quizl = None
+python_fb_label = None
+python_nextb = None
+
+def python_quiz_page():
+    global python_score, python_current_question, python_chc_buttons, python_quizl, python_fb_label, python_nextb
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+        
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+        
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda:homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+        
+    python_quizl = ttk.Label(app, font=('Times New Roman', 30, 'bold'), foreground="white", background="#810403", anchor='center', wraplength=1400, padding=10)
+    python_quizl.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
+
+    python_chc_buttons = []
+    for i in range(4):
+        button = ttk.Button(app, command=lambda i=i: python_check_answer(i))
+        button.place(relx=0.5, rely=0.34 + i * 0.07, width=700, height=50, anchor=tkinter.CENTER)
+        python_chc_buttons.append(button)
+        
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure('TButton', font=('Times New Roman', 25),foreground = 'black', background = '#cccccc', focuscolor='none')
+
+    python_fb_label = ttk.Label(app, font=('Times New Roman', 30, 'bold'), background="#cccccc", anchor='center', padding=10)
+    python_fb_label.place(relx=0.5, rely=0.64, anchor=tkinter.CENTER)
+
+    global python_score_label 
+    python_score_label = ttk.Label(app, font=('Times New Roman', 25, 'bold'), foreground="white", background="#810403", text="Score: 0/{}".format(len(python_quiz_data)), anchor='center', padding=10)
+    python_score_label.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
+
+    python_nextb = ttk.Button(app, text="Next", command=python_next_question, state="disabled")
+    python_nextb.place(relx=0.5, rely=0.85, anchor=tkinter.CENTER)
+
+    python_current_question = 0
+    python_show_question()
+
+def python_show_question():
+    global python_current_question, python_quizl, python_fb_label, python_nextb
+    question = python_quiz_data[python_current_question]
+    python_quizl.configure(text=question["question"])
+
+    choices = question["choices"]
+    for i in range(4):
+        python_chc_buttons[i].config(text=choices[i], state='normal')
+
+    python_fb_label.config(text="")
+    python_nextb.config(state='disabled')
+
+def python_check_answer(choice):
+    global python_score
+    question = python_quiz_data[python_current_question]
+    selected_choice = python_chc_buttons[choice].cget("text")
+
+    if selected_choice == question["answer"]:
+        python_score += 1
+        python_score_label.config(text="Score: {}/{}".format(python_score, len(python_quiz_data)))
+        python_fb_label.config(text="Correct!", foreground="green")
+    else:
+        python_fb_label.config(text="Incorrect!", foreground="red")
+
+    for button in python_chc_buttons:
+        button.config(state='disabled')
+    python_nextb.config(state='normal')
+
+def python_next_question():
+    global python_current_question
+    python_current_question += 1
+
+    if python_current_question < len(python_quiz_data):
+        python_show_question()
+    else:
+        messagebox.showinfo("Quiz Completed", "Quiz Completed! Final Score: {}/{}".format(python_score, len(python_quiz_data)))
+        for widget in app.winfo_children():
+            widget.destroy()
+        homepage()
+        
+    
+javascript_score = 0
+javascript_current_question = 0
+javascript_chc_buttons = []
+javascript_quizl = None
+javascript_fb_label = None
+javascript_nextb = None
+
+def javascript_quiz_page():
+    global javascript_score, javascript_current_question, javascript_chc_buttons, javascript_quizl, javascript_fb_label, javascript_nextb
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+        
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda: homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+        
+    javascript_quizl = ttk.Label(app, font=('Times New Roman', 30, 'bold'), foreground="white", background="#810403", anchor='center', wraplength=1400, padding=10)
+    javascript_quizl.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
+
+    javascript_chc_buttons = []
+    for i in range(4):
+        button = ttk.Button(app, width=25, command=lambda i=i: javascript_check_answer(i))
+        button.place(relx=0.5, rely=0.34 + i * 0.07, width=700, height=50, anchor=tkinter.CENTER)
+        javascript_chc_buttons.append(button)
+        
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure('TButton', font=('Times New Roman', 25),foreground = 'black', background = '#cccccc', focuscolor='none')
+
+    javascript_fb_label = ttk.Label(app, font=('Times New Roman', 30, 'bold'), background="#cccccc", anchor='center', padding=10)
+    javascript_fb_label.place(relx=0.5, rely=0.64, anchor=tkinter.CENTER)
+
+    global javascript_score_label 
+    javascript_score_label = ttk.Label(app, font=('Times New Roman', 25, 'bold'), foreground="white", background="#810403", text="Score: 0/{}".format(len(javascript_quiz_data)), anchor='center', padding=10)
+    javascript_score_label.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
+
+    javascript_nextb = ttk.Button(app, text="Next", command=javascript_next_question, state="disabled")
+    javascript_nextb.place(relx=0.5, rely=0.85, anchor=tkinter.CENTER)
+
+    javascript_current_question = 0
+    javascript_show_question()
+
+def javascript_show_question():
+    global javascript_current_question, javascript_quizl, javascript_fb_label, javascript_nextb
+    question = javascript_quiz_data[javascript_current_question]
+    javascript_quizl.configure(text=question["question"])
+
+    choices = question["choices"]
+    for i in range(4):
+        javascript_chc_buttons[i].config(text=choices[i], state='normal')
+
+    javascript_fb_label.config(text="")
+    javascript_nextb.config(state='disabled')
+
+def javascript_check_answer(choice):
+    global javascript_score
+    question = javascript_quiz_data[javascript_current_question]
+    selected_choice = javascript_chc_buttons[choice].cget("text")
+
+    if selected_choice == question["answer"]:
+        javascript_score += 1
+        javascript_score_label.config(text="Score: {}/{}".format(javascript_score, len(javascript_quiz_data)))
+        javascript_fb_label.config(text="Correct!", foreground="green")
+    else:
+        javascript_fb_label.config(text="Incorrect!", foreground="red")
+
+    for button in javascript_chc_buttons:
+        button.config(state='disabled')
+    javascript_nextb.config(state='normal')
+
+def javascript_next_question():
+    global javascript_current_question
+    javascript_current_question += 1
+
+    if javascript_current_question < len(javascript_quiz_data):
+        javascript_show_question()
+    else:
+        messagebox.showinfo("Quiz Completed", "Quiz Completed! Final Score: {}/{}".format(javascript_score, len(javascript_quiz_data)))
+        for widget in app.winfo_children():
+            widget.destroy()
+        homepage()
+        
+cpp_score = 0
+cpp_current_question = 0
+cpp_chc_buttons = []
+cpp_quizl = None
+cpp_fb_label = None
+cpp_nextb = None
+
+def cpp_quiz_page():
+    global cpp_score, cpp_current_question, cpp_chc_buttons, cpp_quizl, cpp_fb_label, cpp_nextb
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+    
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda: homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+        
+    cpp_quizl = ttk.Label(app, font=('Times New Roman', 30, 'bold'), foreground="white", background="#810403", anchor='center', wraplength=1400, padding=10)
+    cpp_quizl.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
+
+    cpp_chc_buttons = []
+    for i in range(4):
+        button = ttk.Button(app, width=25, command=lambda i=i: cpp_check_answer(i))
+        button.place(relx=0.5, rely=0.34 + i * 0.07, width=800, height=50, anchor=tkinter.CENTER)
+        cpp_chc_buttons.append(button)
+        
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure('TButton', font=('Times New Roman', 25),foreground = 'black', background = '#cccccc', focuscolor='none')
+
+    cpp_fb_label = ttk.Label(app, font=('Times New Roman', 30, 'bold'), background="#cccccc", anchor='center', padding=10)
+    cpp_fb_label.place(relx=0.5, rely=0.64, anchor=tkinter.CENTER)
+
+    global cpp_score_label 
+    cpp_score_label = ttk.Label(app, font=('Times New Roman', 25, 'bold'), foreground="white", background="#810403", text="Score: 0/{}".format(len(cpp_quiz_data)), anchor='center', padding=10)
+    cpp_score_label.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
+
+    cpp_nextb = ttk.Button(app, text="Next", command=cpp_next_question, state="disabled")
+    cpp_nextb.place(relx=0.5, rely=0.85, anchor=tkinter.CENTER)
+
+    cpp_current_question = 0
+    cpp_show_question()
+
+def cpp_show_question():
+    global cpp_current_question, cpp_quizl, cpp_fb_label, cpp_nextb
+    question = cpp_quiz_data[cpp_current_question]
+    cpp_quizl.configure(text=question["question"])
+
+    choices = question["choices"]
+    for i in range(4):
+        cpp_chc_buttons[i].config(text=choices[i], state='normal')
+
+    cpp_fb_label.config(text="")
+    cpp_nextb.config(state='disabled')
+
+def cpp_check_answer(choice):
+    global cpp_score
+    question = cpp_quiz_data[cpp_current_question]
+    selected_choice = cpp_chc_buttons[choice].cget("text")
+
+    if selected_choice == question["answer"]:
+        cpp_score += 1
+        cpp_score_label.config(text="Score: {}/{}".format(cpp_score, len(cpp_quiz_data)))
+        cpp_fb_label.config(text="Correct!", foreground="green")
+    else:
+        cpp_fb_label.config(text="Incorrect!", foreground="red")
+
+    for button in cpp_chc_buttons:
+        button.config(state='disabled')
+    cpp_nextb.config(state='normal')
+
+def cpp_next_question():
+    global cpp_current_question
+    cpp_current_question += 1
+
+    if cpp_current_question < len(cpp_quiz_data):
+        cpp_show_question()
+    else:
+        messagebox.showinfo("Quiz Completed", "Quiz Completed! Final Score: {}/{}".format(cpp_score, len(cpp_quiz_data)))
+        for widget in app.winfo_children():
+            widget.destroy()
+        homepage()
+        
+html_score = 0
+htmlcurrent_question = 0
+html_chc_buttons = []
+html_quizl = None
+html_fb_label = None
+html_nextb = None
+
+def html_quiz_page():
+    global html_score, html_current_question, html_chc_buttons, html_quizl, html_fb_label, html_nextb
+    for widget in app.winfo_children():
+        widget.destroy()
+     
+    def update_time():
+        now = datetime.now()
+        current_time = now.strftime("%Y-%m-%d %I:%M:%S %p")
+        time_label.configure(text=current_time)
+        app.after(1000, update_time)
+        
+    time_frame = ctk.CTkFrame(master=app, width=300, height=50, fg_color="#f6efef", corner_radius=5, border_width=5, border_color="#810403")
+    time_frame.place(relx=0.9, rely=0.08, anchor=tkinter.CENTER)
+
+    time_label = ctk.CTkLabel(master=time_frame, text="", font=('Arial', 18, 'bold'), text_color="#810403")
+    time_label.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+    update_time()
+    
+    def toggle_menu():
+        def collapse_toggle_menu():
+            toggle_menu_fm.destroy()
+            toggle_btn.config(text="≡")
+            toggle_btn.config(command=toggle_menu)
+        toggle_menu_fm = tkinter.Frame(app, bg="white")
+
+        def change(): 
+            if ctk.get_appearance_mode() == "Dark":
+                ctk.set_appearance_mode("Light")
+            else:
+                ctk.set_appearance_mode("Dark")
+            
+        change_button = tkinter.Button(toggle_menu_fm, text="Light/Dark Mode", font=('Times New Roman', 20), bd=0, bg='#4582ec', fg='white', command=change)
+        change_button.place(x=25, y=23)
+        
+        feedback_button = tkinter.Button(toggle_menu_fm, text= "Feedback", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=feedback_page)
+        feedback_button.place(x=52, y=95)
+        
+        logout_button = tkinter.Button(toggle_menu_fm, text= "Log Out", font=('Times New Roman', 25), bd=0, bg='#4582ec', fg='white', command=log_out)
+        logout_button.place(x=60, y=175)
+        
+        window_height = 250
+        toggle_menu_fm.place(relx=0.94, rely=0.16, anchor=tkinter.CENTER, height=window_height, width=250)
+        toggle_btn.config(text="x")
+        toggle_btn.config(command=collapse_toggle_menu)
+
+    head_frame1 = tkinter.Frame(app, bg="white")
+
+    toggle_btn = tkinter.Button(head_frame1, text="≡", bg="#4582ec", fg='white', font=('bold', 30), bd=0, command=toggle_menu)
+    toggle_btn.pack(side=RIGHT)
+
+    head_frame1.pack(side=tkinter.TOP, fill=tkinter.X)
+    head_frame1.pack_propagate(False)
+    head_frame1.configure(height=45)
+        
+    back_button = ctk.CTkButton(master=app, width=55, height=36, fg_color="#810403", text="Back", font=('Times New Roman', 15), corner_radius=5, command=lambda: homepage())
+    back_button.place(relx=0.1, rely=0.1, anchor=tkinter.CENTER)
+        
+    html_quizl = ttk.Label(app, font=('Times New Roman', 30, 'bold'), foreground="white", background="#810403", anchor='center', wraplength=1400, padding=10)
+    html_quizl.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
+
+    html_chc_buttons = []
+    for i in range(4):
+        button = ttk.Button(app, width=25, command=lambda i=i: html_check_answer(i))
+        button.place(relx=0.5, rely=0.34 + i * 0.07, width=1100, height=50, anchor=tkinter.CENTER)
+        html_chc_buttons.append(button)
+        
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure('TButton', font=('Times New Roman', 15),foreground = 'black', background = '#cccccc', focuscolor='none')
+
+    html_fb_label = ttk.Label(app, font=('Times New Roman', 30, 'bold'), background="#cccccc", anchor='center', padding=10)
+    html_fb_label.place(relx=0.5, rely=0.64, anchor=tkinter.CENTER)
+
+    global html_score_label 
+    html_score_label = ttk.Label(app, font=('Times New Roman', 25, 'bold'), foreground="white", background="#810403", text="Score: 0/{}".format(len(html_quiz_data)), anchor='center', padding=10)
+    html_score_label.place(relx=0.5, rely=0.75, anchor=tkinter.CENTER)
+
+    html_nextb = ttk.Button(app, text="Next", command=html_next_question, state="disabled")
+    html_nextb.place(relx=0.5, rely=0.85, anchor=tkinter.CENTER)
+
+    html_current_question = 0
+    html_show_question()
+
+def html_show_question():
+    global html_current_question, html_quizl, html_fb_label, html_nextb
+    question = html_quiz_data[html_current_question]
+    html_quizl.configure(text=question["question"])
+
+    choices = question["choices"]
+    for i in range(4):
+        html_chc_buttons[i].config(text=choices[i], state='normal')
+
+    html_fb_label.config(text="")
+    html_nextb.config(state='disabled')
+
+def html_check_answer(choice):
+    global html_score
+    question = html_quiz_data[html_current_question]
+    selected_choice = html_chc_buttons[choice].cget("text")
+
+    if selected_choice == question["answer"]:
+        html_score += 1
+        html_score_label.config(text="Score: {}/{}".format(html_score, len(html_quiz_data)))
+        html_fb_label.config(text="Correct!", foreground="green")
+    else:
+        html_fb_label.config(text="Incorrect!", foreground="red")
+
+    for button in html_chc_buttons:
+        button.config(state='disabled')
+    html_nextb.config(state='normal')
+
+def html_next_question():
+    global html_current_question
+    html_current_question += 1
+
+    if html_current_question < len(html_quiz_data):
+        html_show_question()
+    else:
+        messagebox.showinfo("Quiz Completed", "Quiz Completed! Final Score: {}/{}".format(html_score, len(html_quiz_data)))
+        for widget in app.winfo_children():
+            widget.destroy()
+        homepage()
+            
+signinpage()
+app.mainloop()
