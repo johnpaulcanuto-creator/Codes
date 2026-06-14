@@ -1,0 +1,3998 @@
+<LoginScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: [dp(15), dp(10), dp(15), dp(10)]
+        md_bg_color: 0.102, 0.384, 0.557, 1
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(5)
+            size_hint_y: None
+            height: dp(120)
+            pos_hint: {'center_x': 0.5}
+
+            FitImage:
+                source: 'assets/logo.png'
+                size_hint: (None, None)
+                size: (dp(229.32), dp(164))
+                pos_hint: {'center_x': 0.5}
+                keep_ratio: False
+
+            MDLabel:
+                text: "INTELLICARDS"
+                halign: 'center'
+                font_style: 'H5'
+                bold: True
+                theme_text_color: "Custom"
+                text_color: 1.0, 1.0, 1.0, 1
+                size_hint_y: None
+                height: dp(40)
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: dp(280), dp(320)
+            pos_hint: {'center_x': 0.5}
+            elevation: 2
+            padding: dp(20)
+            spacing: dp(15)
+            radius: [15, 15, 15, 15]
+            md_bg_color: 1.0, 1.0, 1.0, 1
+
+            MDTextField:
+                id: username
+                hint_text: "Username"
+                icon_left: 'account'
+                mode: 'fill'
+                size_hint_y: None
+                height: dp(60)
+                fill_color: 0.102, 0.384, 0.557, 1
+                active_fill_color: 0.102, 0.384, 0.557, 1
+                radius: [10, 10, 10, 10]
+
+            MDTextField:
+                id: password
+                hint_text: "Password"
+                icon_left: 'lock'
+                password: True
+                mode: 'fill'
+                size_hint_y: None
+                height: dp(60)
+                fill_color: 0.102, 0.384, 0.557, 1
+                active_fill_color: 0.102, 0.384, 0.557, 1
+                radius: [10, 10, 10, 10]
+
+            MDRoundFlatIconButton:
+                text: "LOG IN"
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: 0.8
+                elevation: 2
+                md_bg_color: 0.102, 0.384, 0.557, 1
+                theme_text_color: "Custom"
+                text_color: "white"
+                size_hint_y: None
+                height: dp(45)
+                on_release:
+                    app.login(username.text, password.text)
+
+            MDRoundFlatIconButton:
+                text: "SIGN UP"
+                pos_hint: {'center_x': 0.5}
+                theme_text_color: "Custom"
+                text_color: 0.102, 0.384, 0.557, 1
+                line_color: 0, 0, 1, 1
+                size_hint: 0.8, None
+                height: dp(30)
+                on_release:
+                    root.manager.current = "signup"
+
+            MDLabel:
+                text: "[color=#1A628E]Forgot password?[/color] [color=#1A628E][u]Recover here[/u][/color]"
+
+                halign: 'center'
+                markup: True
+                size_hint_y: None
+                height: dp(20)
+
+<SignupScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(10)
+        padding: [dp(15), dp(10), dp(15), dp(10)]
+        md_bg_color: 0.102, 0.384, 0.557, 1
+
+        MDLabel:
+            text: "9:41"
+            halign: 'right'
+            font_style: 'Caption'
+            theme_text_color: "Custom"
+            text_color: 1.0, 1.0, 1.0, 1
+            size_hint_y: None
+            height: dp(20)
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(5)
+            size_hint_y: None
+            height: dp(120)
+            pos_hint: {'center_x': 0.5}
+
+            FitImage:
+                source: 'assets/logo.png'
+                size_hint: (None, None)
+                size: (dp(229.32), dp(164))
+                pos_hint: {'center_x': 0.5}
+                keep_ratio: False
+
+            MDLabel:
+                text: "CREATE ACCOUNT"
+                halign: 'center'
+                font_style: 'H5'
+                bold: True
+                theme_text_color: "Custom"
+                text_color: 1.0, 1.0, 1.0, 1
+                size_hint_y: None
+                height: dp(40)
+
+        MDCard:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: dp(280), dp(360)
+            pos_hint: {'center_x': 0.5}
+            elevation: 3
+            padding: dp(20)
+            spacing: dp(15)
+            radius: [20, 20, 20, 20]
+            md_bg_color: 1.0, 1.0, 1.0, 1
+            shadow_softness: 1.0
+
+            MDTextField:
+                id: username_signup
+                hint_text: "Username"
+                icon_left: 'account'
+                mode: 'fill'
+                size_hint_y: None
+                height: dp(60)
+                fill_color: 0.102, 0.384, 0.557, 1
+                active_fill_color: 0.102, 0.384, 0.557, 1
+                radius: [15, 15, 15, 15]
+
+            MDTextField:
+                id: password_signup
+                hint_text: "Password"
+                icon_left: 'lock'
+                password: True
+                mode: 'fill'
+                size_hint_y: None
+                height: dp(60)
+                fill_color: 0.102, 0.384, 0.557, 1
+                active_fill_color: 0.102, 0.384, 0.557, 1
+                radius: [15, 15, 15, 15]
+
+            MDTextField:
+                id: confirm_password_signup
+                hint_text: "Confirm Password"
+                icon_left: 'lock-check'
+                password: True
+                mode: 'fill'
+                size_hint_y: None
+                height: dp(60)
+                fill_color: 0.102, 0.384, 0.557, 1
+                active_fill_color: 0.102, 0.384, 0.557, 1
+                radius: [15, 15, 15, 15]
+
+            MDRoundFlatIconButton:
+                text: "REGISTER"
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: 0.8
+                elevation: 2
+                md_bg_color: 0.102, 0.384, 0.557, 1
+                theme_text_color: "Custom"
+                text_color: "white"
+                size_hint_y: None
+                height: dp(45)
+                on_release:
+                    app.signup(username_signup.text, password_signup.text, confirm_password_signup.text)
+
+            MDFlatButton:
+                text: "BACK TO LOGIN"
+                pos_hint: {'center_x': 0.5}
+                theme_text_color: "Custom"
+                text_color: 0.102, 0.384, 0.557, 1
+                size_hint_y: None
+                height: dp(30)
+                on_release:
+                    root.manager.current = "login"
+                    
+<HomeScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(30)
+        spacing: dp(20)
+        md_bg_color: 0.102, 0.384, 0.557, 1
+
+        MDLabel:
+            text: "Master your memory, one card at a time."
+            halign: "center"
+            font_style: "H5"
+            theme_text_color: "Custom"
+            text_color: 0.914, 0.796, 0.467, 1
+            size_hint_y: None
+            height: dp(60)
+            
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+
+
+            MDCard:
+                size_hint: None, None
+                size: "200dp", "220dp"
+                padding: "10dp"
+                radius: [25, 25, 25, 25]
+                md_bg_color: 0.102, 0.384, 0.557, 1
+                elevation: 2
+                canvas.before:
+                    Color:
+                        rgba: 255, 223, 0, 1  
+                    Line:
+                        width: 2
+                        rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+                
+                MDCard:
+                    size_hint: None, None
+                    size: "180dp", "200dp"
+                    padding: "10dp"
+                    radius: [20, 20, 20, 20]
+                    md_bg_color: 0.914, 0.796, 0.467, 1
+                    elevation: 1
+                    canvas.before:
+                        Color:
+                            rgba: 0.69, 0.576, 0.27, 1
+                        Line:
+                            width: 5
+                            rounded_rectangle: (self.x, self.y, self.width, self.height, 25)
+
+                    MDLabel:
+                        text: "Flashcard"
+                        halign: "center"
+                        font_style: "Subtitle1"
+                        text_color:  0.0, 0.0, 0.5, 1
+                        font_size: "30sp"
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "bottom"
+            
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(30)
+                padding: dp(20)
+                size_hint_y: None
+                height: self.minimum_height
+                pos_hint: {"center_x": 0.5}
+                
+                MDRoundFlatIconButton:
+                    text: "MODULES"
+                    icon: "view-module"
+                    on_release:
+                        app.change_screen("Subjects")
+                    font_size: "20sp"
+                    md_bg_color: 0.95, 0.85, 0.3, 1
+                    text_color: 0.1, 0.1, 0.5, 1
+                    size_hint: 1, 0.5
+                    
+                MDRoundFlatIconButton:
+                    height: "100dp"
+                    text: "CREATE DECKS"
+                    on_release:
+                        app.change_screen("Decks")
+                    icon: "view-carousel"  # or "layers", "file-multiple", etc.
+                    on_release: app.show_decks()
+                    font_size: "20sp"
+                    md_bg_color: 0.95, 0.85, 0.3, 1
+                    text_color: 0.1, 0.1, 0.5, 1
+                    size_hint: 1, None
+
+
+                MDRoundFlatIconButton:
+                    text: "EXIT"
+                    icon: "exit-to-app"
+                    on_release:
+                        app.stop()
+                    font_size: "20sp"
+                    md_bg_color: 0.95, 0.85, 0.3, 1
+                    text_color: 0.1, 0.1, 0.5, 1
+                    size_hint: 1, 0.5
+                    
+<ModulesScreen>:
+
+    name: "Difficulty"
+    
+
+    
+    FloatLayout:
+    
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 0.98, "x": 0.02}
+            size: 0, 0  
+            size_hint: 0.07, 0.04
+            on_release: app.change_screen("Decks")
+            icon_size: "22sp"
+            md_bg_color: 0.102, 0.384, 0.557, 1
+            theme_text_color: "Custom"
+            text_color: 214/255, 179/255, 84/255, 1  
+            canvas.before:
+                Color:
+                    rgba: 214/255, 179/255, 84/255, 1 
+                Line:
+                    width: 3
+                    circle: (self.center_x, self.center_y, self.width / 2)
+
+        MDLabel:
+            text: "Flashcards"
+            halign: "center"
+            pos_hint: {"center_y": 0.90}
+            font_style: "H4"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 0.6, 1
+            bold: True
+            
+        MDLabel:
+            text: "Difficulty"
+            halign: "center"
+            pos_hint: {"center_y": 0.84}
+            font_style: "H4"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 0.6, 1
+            bold: True
+            
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+            
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(50)
+                padding: dp(70)
+                size_hint: 1, 0.60
+                height: self.minimum_height
+                pos_hint: {"center_x": 0.5}
+                
+                MDRoundFlatIconButton:
+                    text: "EASY"
+                    size_hint: 1, 0.60
+                    font_style: "H6"
+                    md_bg_color: 0.95, 0.85, 0.3, 1
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    bold: True
+                    on_release: app.start_quiz("easy")
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 0.3  # Shadow color: semi-transparent black
+                        RoundedRectangle:
+                            pos: self.x + 2, self.y - 2  # Slight offset for shadow
+                            size: self.size
+                            radius: [20]  # Rounded edges to match button style
+                    
+                MDRoundFlatIconButton:
+                    text: "MEDIUM"
+                    size_hint: 1, 0.60
+                    font_style: "H6"
+                    md_bg_color: 0.95, 0.85, 0.3, 1
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    bold: True
+                    on_release: app.start_quiz("medium")
+
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 0.3  # Shadow color: semi-transparent black
+                        RoundedRectangle:
+                            pos: self.x + 2, self.y - 2  # Slight offset for shadow
+                            size: self.size
+                            radius: [20]  # Rounded edges to match button style
+                    
+
+                    
+                MDRoundFlatIconButton:
+                    text: "HARD"
+                    size_hint: 1, 0.60
+                    font_style: "H6"
+                    md_bg_color: 0.95, 0.85, 0.3, 1
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    bold: True
+                    on_release: app.start_quiz("hard")
+                    
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 0.3  
+                        RoundedRectangle:
+                            pos: self.x + 2, self.y - 2  
+                            size: self.size
+                            radius: [20]  
+
+<CreateDecks>:
+
+    name: "Decks"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 0.98, "x": 0.02}
+            size: 0, 0  
+            size_hint: 0.07, 0.04
+            on_release: app.change_screen("home")
+            icon_size: "22sp"
+            md_bg_color: 0.102, 0.384, 0.557, 1
+            theme_text_color: "Custom"
+            text_color: 214/255, 179/255, 84/255, 1  
+            canvas.before:
+                Color:
+                    rgba: 214/255, 179/255, 84/255, 1 
+                Line:
+                    width: 3
+                    circle: (self.center_x, self.center_y, self.width / 2)
+
+        MDLabel:
+            text: "INTELLICARDS"
+            halign: "center"
+            pos_hint: {"center_y": 0.90}
+            font_style: "H4"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            bold: True
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(50)
+        padding: dp(60)
+        size_hint: 1, 0.7
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDRoundFlatIconButton:
+            
+            text: "DECKS"
+            size_hint: 1, 0.6
+            font_style: "H3"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.change_screen("decks")
+
+
+
+
+        MDRoundFlatIconButton:
+            icon: "plus-box"
+            text: "CREATE"
+            size_hint: 1, 1
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.change_screen("Difficulty")
+
+
+
+<QuizScreen>:
+
+    MDFloatLayout:
+        md_bg_color: 0.102, 0.384, 0.557, 1
+
+        MDTopAppBar:
+            id: top_bar
+            title: "Quiz Deck"
+            pos_hint: {"top": 1}
+            md_bg_color: 0.07, 0.28, 0.41, 1 
+            elevation: 3
+            left_action_items: [["lightbulb-outline", lambda x: app.show_hint()]]
+
+
+
+        MDLabel:
+            id: subject_label
+            text: ""
+            font_style: "H5"
+            halign: "center"
+            pos_hint: {"center_x": 0.5, "top": 0.95}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 0.6, 1
+            
+        MDLabel:
+            id: progress_label
+            text: "0/0"
+            font_style: "Subtitle1"
+            halign: "center"
+            pos_hint: {"center_x": 0.5, "top": 0.88}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 0.6, 1
+            
+        MDCard:
+            size_hint: 0.9, 0.4
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+            elevation: 2
+            padding: "20dp"
+            orientation: "vertical"
+            spacing: dp(10)
+
+            md_bg_color: 0.914, 0.796, 0.467, 1
+            
+            MDLabel:
+                id: question_label
+                text: ""
+                font_style: "H6"
+                halign: "center"
+                valign: "center"
+                size_hint_y: None
+                height: self.texture_size[1]
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+
+            BoxLayout:
+                orientation: "horizontal"
+                spacing: dp(10)
+                size_hint_y: None
+                height: dp(40)
+
+
+            MDRaisedButton:
+                text: "🔇 Mute Music"
+                pos_hint: {"center_x": 0.5}
+                on_release: app.toggle_music()
+
+
+            MDRaisedButton:
+                text: "🔊 Read Question"
+                pos_hint: {"center_x": 0.5}
+                on_release:
+                    app.speak_text(root.ids.question_label.text)
+
+
+            
+                
+        MDFloatLayout:
+            size_hint: 0.9, 0.25
+            pos_hint: {"center_x": 0.5, "center_y": 0.25}
+            
+            MDRoundFlatIconButton:
+                id: true_button
+                text: "TRUE"
+                size_hint: 0.4, 0.4
+                pos_hint: {"x": 0, "center_y": 0.5}
+                md_bg_color: 1, 1, 0.7, 1
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+                on_release: app.check_answer(True)
+
+                
+            MDRoundFlatIconButton:
+                id: false_button
+                text: "FALSE"
+                size_hint: 0.4, 0.4
+                pos_hint: {"right": 1, "center_y": 0.5}
+                md_bg_color: 1, 1, 0.7, 1
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+                on_release: app.check_answer(False)
+
+                
+        MDRoundFlatIconButton:
+            id: next_button
+            text: "NEXT"
+            size_hint: 0.3, 0.08
+            pos_hint: {"center_x": 0.5, "y": 0.05}
+            md_bg_color: 0.07, 0.28, 0.41, 1 
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            on_release: app.next_question()
+
+<ScoreScreen>:
+    MDFloatLayout:
+        md_bg_color: 0.102, 0.384, 0.557, 1
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint: 0.8, None
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5, "top": 0.85}
+            spacing: dp(10)
+
+            MDLabel:
+                id: subject_label
+                text: "FILIPINO"
+                font_style: "H5"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 0.6, 1
+                bold: True
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                text: "Your Score"
+                font_style: "H6"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 0.6, 1
+                bold: True
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDLabel:
+                id: score_label
+                text: "9 / 10"
+                font_style: "H3"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 0.6, 1
+                bold: True
+                size_hint_y: None
+                height: self.texture_size[1]
+
+        MDRoundFlatIconButton:
+            icon: "reload"
+            text: "RETRY"
+            size_hint: 0.4, 0.1
+            pos_hint: {"center_x": 0.3, "y": 0.2}
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            on_release:
+                app.start_quiz("")
+
+        MDRoundFlatIconButton:
+            icon: "home"
+            text: "HOME"
+            size_hint: 0.4, 0.1
+            pos_hint: {"center_x": 0.7, "y": 0.2}
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            on_release:
+                app.change_screen("home")
+
+
+<DeckScreen>:
+    name: "decks"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Decks")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDLabel:
+        text: "DECKS"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(50)
+        padding: dp(70)
+        size_hint: 1, 0.60
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5}
+        
+        MDRoundFlatIconButton:
+            text: "Easy"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("Add") 
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  # Shadow color: semi-transparent black
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  # Slight offset for shadow
+                    size: self.size
+                    radius: [20]  # Rounded edges to match button style
+            
+        MDRoundFlatIconButton:
+            text: "Medium"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("AddMedium")
+            on_release: 
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  # Shadow color: semi-transparent black
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  # Slight offset for shadow
+                    size: self.size
+                    radius: [20]  # Rounded edges to match button style
+            
+
+            
+        MDRoundFlatIconButton:
+            text: "Hard"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("AddHard")
+            on_release: 
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  
+                    size: self.size
+                    radius: [20]  
+
+
+
+
+
+
+
+<AddScreen>:
+    name: "Add"
+
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 0.98, "x": 0.02}
+            size_hint: 0.07, 0.04
+            on_release: app.change_screen("decks")
+            icon_size: "22sp"
+            md_bg_color: 0.102, 0.384, 0.557, 1
+            theme_text_color: "Custom"
+            text_color: 214/255, 179/255, 84/255, 1
+            canvas.before:
+                Color:
+                    rgba: 214/255, 179/255, 84/255, 1
+                Line:
+                    width: 3
+                    circle: (self.center_x, self.center_y, self.width / 2)
+
+        MDLabel:
+            text: "Deck Maker"
+            halign: "center"
+            pos_hint: {"center_y": 0.90}
+            font_style: "H3"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            bold: True
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(20)
+            padding: dp(30)
+            size_hint: 1, 0.6
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+            MDTextField:
+                id: question_input
+                hint_text: "Enter Question"
+                mode: "rectangle"
+
+            MDTextField:
+                id: answer_input
+                hint_text: "Enter Answer (True/False)"
+                mode: "rectangle"
+
+            MDRaisedButton:
+                text: "Add Another Question"
+                on_release: app.add_question(root.ids.question_input.text, root.ids.answer_input.text)
+
+            MDRaisedButton:
+                text: "Start Quiz"
+                on_release: app.start_quiz("easy")
+
+
+
+<AddMediumScreen>:
+    name: "AddMedium"
+
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"top": 0.98, "x": 0.02}
+            size_hint: 0.07, 0.04
+            on_release: app.change_screen("decks")
+            icon_size: "22sp"
+            md_bg_color: 0.102, 0.384, 0.557, 1
+            theme_text_color: "Custom"
+            text_color: 214/255, 179/255, 84/255, 1
+            canvas.before:
+                Color:
+                    rgba: 214/255, 179/255, 84/255, 1
+                Line:
+                    width: 3
+                    circle: (self.center_x, self.center_y, self.width / 2)
+
+        MDLabel:
+            text: "Deck maker"
+            halign: "center"
+            pos_hint: {"center_y": 0.90}
+            font_style: "H4"
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            bold: True
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(15)
+            padding: dp(30)
+            size_hint: 0.80, 0.75
+            pos_hint: {"center_x": 0.5, "center_y": 0.35}
+
+            MDTextField:
+                id: question_input
+                hint_text: "Enter Question"
+                mode: "rectangle"
+
+            MDTextField:
+                id: option_a
+                hint_text: "Option A"
+                mode: "rectangle"
+
+            MDTextField:
+                id: option_b
+                hint_text: "Option B"
+                mode: "rectangle"
+
+            MDTextField:
+                id: option_c
+                hint_text: "Option C"
+                mode: "rectangle"
+
+            MDTextField:
+                id: option_d
+                hint_text: "Option D"
+                mode: "rectangle"
+
+            MDTextField:
+                id: correct_letter
+                hint_text: "Correct Answer (A/B/C/D)"
+                max_text_length: 1
+                mode: "rectangle"
+
+            MDRaisedButton:
+                text: "Add Another Question"
+                on_release: app.submit_medium_question()
+                
+
+            MDRaisedButton:
+                text: "Start Quiz"
+                on_release: app.start_quiz("medium")
+
+
+
+<AddHardScreen>:
+    name: "AddHard"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(10)
+
+        MDLabel:
+            text: "Add a Fill-in-the-Blank Question"
+            halign: "center"
+            font_style: "H6"
+
+        MDTextField:
+            id: question_input
+            hint_text: "Enter the question"
+            mode: "rectangle"
+            multiline: False
+
+        MDTextField:
+            id: answer_input
+            hint_text: "Correct Answer"
+            mode: "rectangle"
+            multiline: False
+
+        MDRaisedButton:
+            text: "Submit Question"
+            on_release: app.submit_hard_question()
+
+        MDRaisedButton:
+            text: "Start Quiz"
+            on_release: app.start_quiz("hard")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<SubjectScreen>:
+    name: "Subjects"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("home")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+
+    MDLabel:
+        text: "SUBJECTS"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(50)
+        padding: dp(70)
+        size_hint: 1, 0.60
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5}
+        
+        MDRoundFlatIconButton:
+            text: "Filipino"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("Subject1")
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  # Shadow color: semi-transparent black
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  # Slight offset for shadow
+                    size: self.size
+                    radius: [20]  # Rounded edges to match button style
+            
+        MDRoundFlatIconButton:
+            text: "Math"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("Subject2")
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  # Shadow color: semi-transparent black
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  # Slight offset for shadow
+                    size: self.size
+                    radius: [20]  # Rounded edges to match button style
+            
+
+            
+        MDRoundFlatIconButton:
+            text: "English"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("Subject3")
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  
+                    size: self.size
+                    radius: [20]  
+
+        MDRoundFlatIconButton:
+            text: "Science"
+            size_hint: 1, 0.70
+            font_style: "H4"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("Subject4")
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.3  
+                RoundedRectangle:
+                    pos: self.x + 2, self.y - 2  
+                    size: self.size
+                    radius: [20]  
+<FilipinoScreen>:
+
+
+    name: "Subject1"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subjects")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDLabel:
+        text: "LEARNING"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    MDLabel:
+        text: "MATERIALS"
+        halign: "center"
+        pos_hint: {"center_y": 0.85}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(50)
+        padding: dp(70)
+        size_hint: 1, 0.60
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5 }
+        
+        MDRoundFlatIconButton:
+            text: "MODULES"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("FilMod")
+
+            
+        MDRoundFlatIconButton:
+            text: "RECORDINGS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("FilRec")
+
+        MDRoundFlatIconButton:
+            text: "HYPERLINKS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("FilLink")
+
+
+
+<FilModScreen>:
+
+    name: "FilMod"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject1")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Lessons"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Module #1"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Filipino_Module_1")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #2"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Filipino_Module_2")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Module #3"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Filipino_Module_3")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #4"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Filipino_Module_4")           
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #5"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Filipino_Module_5")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #6"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Filipino_Module_6")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+                
+
+
+
+<FilRecScreen>:
+
+    name: "FilRec"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject1")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Recordings"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Recordings #1"
+            on_release: app.open_video_actions("Filipino_Recording_1")
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #2"
+            on_release: app.open_video_actions("Filipino_Recording_2")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Recordings #3"
+            on_release: app.open_video_actions("Filipino_Recording_3")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #4"
+            on_release: app.open_video_actions("Filipino_Recording_4")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #5"
+            on_release: app.open_video_actions("Filipino_Recording_5")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #6"
+            on_release: app.open_video_actions("Filipino_Recording_6")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+<FilLinksScreen>:
+
+    name: "FilLink"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject1")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Hyperlinks"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Hyperlink #1"
+            on_release: app.open_link_actions("Filipino_Link_1")
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Hyperlink #2"
+            on_release: app.open_link_actions("Filipino_Link_2")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Hyperlink #3"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "hyperlink #4"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Hyperlink #5"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Hyperlink #6"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+
+<MathScreen>:
+
+    name: "Subject2"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subjects")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDLabel:
+        text: "LEARNING"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    MDLabel:
+        text: "MATERIALS"
+        halign: "center"
+        pos_hint: {"center_y": 0.85}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(50)
+        padding: dp(70)
+        size_hint: 1, 0.60
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5 }
+        
+        MDRoundFlatIconButton:
+            text: "MODULES"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("MathMod")
+
+            
+        MDRoundFlatIconButton:
+            text: "RECORDINGS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("MathRec")
+
+        MDRoundFlatIconButton:
+            text: "HYPERLINKS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("MathLink")
+
+<MathModScreen>:
+
+    name: "MathMod"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject2")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Lessons"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Module #1"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Math_Module_1")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #2"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Math_Module_2")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Module #3"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Math_Module_3")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #4"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Math_Module_4")            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #5"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Math_Module_5")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #6"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Math_Module_6")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+
+<MathRecScreen>:
+
+    name: "MathRec"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject2")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Recordings"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Recordings #1"
+            on_release: app.open_video_actions("Math_Recording_1")
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #2"
+            on_release: app.open_video_actions("Math_Recording_2")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Recordings #3"
+            on_release: app.open_video_actions("Math_Recording_3")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #4"
+            on_release: app.open_video_actions("Math_Recording_4")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #5"
+            on_release: app.open_video_actions("Math_Recording_5")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #6"
+            on_release: app.open_video_actions("Math_Recording_6")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+                    
+<MathLinksScreen>:
+
+    name: "MathLink"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject2")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Hyperlinks"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "My Links"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Quick Access"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Learning Paths"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Topics Menu"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Explore Decks"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Study Shortcuts"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+<EnglishScreen>:
+
+    name: "Subject3"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subjects")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDLabel:
+        text: "LEARNING"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    MDLabel:
+        text: "MATERIALS"
+        halign: "center"
+        pos_hint: {"center_y": 0.85}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(50)
+        padding: dp(70)
+        size_hint: 1, 0.60
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5 }
+        
+        MDRoundFlatIconButton:
+            text: "MODULES"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("EngMod")
+
+            
+        MDRoundFlatIconButton:
+            text: "RECORDINGS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("EngRec")
+
+        MDRoundFlatIconButton:
+            text: "HYPERLINKS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("EngLink")
+
+<EngModScreen>:
+
+    name: "EngMod"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject3")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+
+    MDLabel:
+        text: "Lessons"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Module #1"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("English_Module_1")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #2"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("English_Module_2")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Module #3"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("English_Module_3")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #4"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("English_Module_4")            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #5"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("English_Module_5")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #6"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("English_Module_6")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+<EngRecScreen>:
+
+    name: "EngRec"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject3")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+
+    MDLabel:
+        text: "Recordings"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Recordings #1"
+            on_release: app.open_video_actions("English_Recording_1")
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #2"
+            on_release: app.open_video_actions("English_Recording_2")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Recordings #3"
+            on_release: app.open_video_actions("English_Recording_3")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #4"
+            on_release: app.open_video_actions("English_Recording_4")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #5"
+            on_release: app.open_video_actions("English_Recording_5")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #6"
+            on_release: app.open_video_actions("English_Recording_6")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+<EngLinksScreen>:
+
+    name: "EngLink"
+
+  
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject3")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Hyperlinks"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "My Links"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Quick Access"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Learning Paths"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Topics Menu"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Explore Decks"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Study Shortcuts"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+
+<ScienceScreen>:
+    name: "Subject4"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subjects")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDLabel:
+        text: "LEARNING"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    MDLabel:
+        text: "MATERIALS"
+        halign: "center"
+        pos_hint: {"center_y": 0.85}
+        font_style: "H4"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(50)
+        padding: dp(70)
+        size_hint: 1, 0.60
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.5 }
+        
+        MDRoundFlatIconButton:
+            text: "MODULES"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("SciMod")
+
+            
+        MDRoundFlatIconButton:
+            text: "RECORDINGS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("SciRec")
+
+        MDRoundFlatIconButton:
+            text: "HYPERLINKS"
+            size_hint: 1, 0.40
+            font_style: "H5"
+            md_bg_color: 0.95, 0.85, 0.3, 1
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            bold: True
+            on_release: app.change_screen("SciLink")
+
+<SciModScreen>:
+    name: "SciMod"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject4")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    
+
+    MDLabel:
+        text: "Lessons"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Module #1"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Science_Module_1")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #2"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Science_Module_2")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Module #3"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Science_Module_3")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #4"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Science_Module_4")            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #5"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Science_Module_5")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Module #6"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            on_release: app.open_module_actions("Science_Module_6")
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+<SciRecScreen>:
+
+    name: "SciRec"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject4")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+    MDLabel:
+        text: "Recordings"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "Recordings #1"
+            on_release: app.open_video_actions("Science_Recording_1")
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #2"
+            on_release: app.open_video_actions("Science_Recording_2")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Recordings #3"
+            on_release: app.open_video_actions("Science_Recording_3")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #4"
+            on_release: app.open_video_actions("Science_Recording_4")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #5"
+            on_release: app.open_video_actions("Science_Recording_5")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Recordings #6"
+            on_release: app.open_video_actions("Science_Recording_6")
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+<SciLinksScreen>:
+    name: "SciLink"
+
+    FloatLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.102, 0.384, 0.557, 1   
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                    
+    MDIconButton:
+        icon: "arrow-left"
+        pos_hint: {"top": 0.98, "x": 0.02}
+        size: 0, 0  
+        size_hint: 0.07, 0.04
+        on_release: app.change_screen("Subject4")
+        icon_size: "22sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1
+        theme_text_color: "Custom"
+        text_color: 214/255, 179/255, 84/255, 1  
+        canvas.before:
+            Color:
+                rgba: 214/255, 179/255, 84/255, 1 
+            Line:
+                width: 3
+                circle: (self.center_x, self.center_y, self.width / 2)
+
+    MDIconButton:
+        icon: "note-text-outline" 
+        pos_hint: {"top": 0.85, "x": 0.03}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.edit_lesson()
+
+
+    MDIconButton:
+        icon: "trash-can"
+        pos_hint: {"top": 0.85, "x": 0.90}
+        size_hint: 0.07, 0.04
+        icon_size: "40sp"
+        md_bg_color: 0.102, 0.384, 0.557, 1 
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1  
+        on_release: app.delete_lesson()
+
+    MDLabel:
+        text: "Hyperlinks"
+        halign: "center"
+        pos_hint: {"center_y": 0.90}
+        font_style: "H3"
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        bold: True
+
+
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "center"
+    
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: dp(20)
+        padding: dp(30)
+        size_hint: 1, 0.70
+        height: self.minimum_height
+        pos_hint: {"center_x": 0.5, "center_y": 0.40 }
+        
+        MDRoundFlatIconButton:
+            text: "My Links"
+            size_hint: 1, 0.70
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Quick Access"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)            
+            
+        MDRoundFlatIconButton:
+            text: "Learning Paths"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Topics Menu"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True            
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Explore Decks"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            text: "Study Shortcuts"
+            size_hint: 1, 0.60
+            font_style: "H5"
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+        MDRoundFlatIconButton:
+            size_hint: 1, 0.70
+            md_bg_color: 1.0, 0.98, 0.88, 1.0
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            theme_text_color: "Custom"
+            text_color: 0.1, 0.1, 0.5, 1
+            elevation: 2
+            canvas.before:
+                Color:
+                    rgba: 255, 223, 0, 1  
+                Line:
+                    width: 5
+                    rounded_rectangle: (self.x, self.y, self.width, self.height, 15)
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "15dp"
+                size_hint_x: None
+                width: self.minimum_width
+                padding: "10dp"
+                pos_hint: {"center_x": 0.5}
+                
+                MDIcon:
+                    icon: "plus-box"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.1, 0.5, 1
+                    icon_size: "30sp"
+
+
+<QuizMedScreen>:
+
+    name: "QuizMed"
+
+    MDFloatLayout:
+        md_bg_color: 0.102, 0.384, 0.557, 1
+
+        MDTopAppBar:
+            id: top_bar
+            title: "Quiz Deck"
+            pos_hint: {"top": 1}
+            md_bg_color: 0.07, 0.28, 0.41, 1 
+            elevation: 3
+            left_action_items: [["lightbulb-outline", lambda x: app.show_hint()]]
+
+        
+
+
+        MDLabel:
+            id: subject_label
+            text: ""
+            font_style: "H5"
+            halign: "center"
+            pos_hint: {"center_x": 0.5, "top": 0.95}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 0.6, 1
+            
+        MDLabel:
+            id: progress_label
+            text: "0/0"
+            font_style: "Subtitle1"
+            halign: "center"
+            pos_hint: {"center_x": 0.5, "top": 0.88}
+            theme_text_color: "Custom"
+            text_color: 1, 1, 0.6, 1
+            
+        MDCard:
+            size_hint: 0.9, 0.4
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+            elevation: 2
+            padding: "20dp"
+            orientation: "vertical"
+            md_bg_color: 0.914, 0.796, 0.467, 1
+            
+            MDLabel:
+                id: question_label
+                text: ""
+                font_style: "H6"
+                halign: "center"
+                valign: "center"
+                size_hint_y: None
+                height: self.texture_size[1]
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(5)
+                size_hint_y: None
+                height: self.minimum_height
+
+            MDRaisedButton:
+                text: "🔇 Mute Music"
+                pos_hint: {"center_x": 0.5}
+                on_release: app.toggle_music()
+
+            Widget:
+                size_hint_y: None
+                height: dp(5) 
+
+            MDRaisedButton:
+                text: "🔊 Read Question"
+                pos_hint: {"center_x": 0.5}
+                on_release:
+                    app.speak_text(root.ids.question_label.text)
+
+                
+        GridLayout:
+            cols: 1
+            rows: 4
+            spacing: dp(20)
+            padding: dp(40)
+            size_hint: 1, 0.4
+            pos_hint: {"center_x": 0.6, "center_y": 0.2}
+
+            MDRoundFlatIconButton:
+                id: button_a
+                text: "A"
+                md_bg_color: 1, 1, 0.7, 1
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+                on_release: app.check_answer(True)
+
+            MDRoundFlatIconButton:
+                id: button_b
+                text: "B"
+                md_bg_color: 1, 1, 0.7, 1
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+                on_release: app.check_answer(False)
+
+            MDRoundFlatIconButton:
+                id: button_c
+                text: "C"
+                md_bg_color: 1, 1, 0.7, 1
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+                on_release: app.check_answer(True)
+
+            MDRoundFlatIconButton:
+                id: button_d
+                text: "D"
+                md_bg_color: 1, 1, 0.7, 1
+                theme_text_color: "Custom"
+                text_color: 0.1, 0.1, 0.5, 1
+                on_release: app.check_answer(False)
+
+
+
+<QuizHardScreen>:
+    name: "QuizHard"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(10)
+
+        MDLabel:
+            id: subject_label
+            text: "Subject"
+            font_style: "Subtitle1"
+            halign: "center"
+            theme_text_color: "Secondary"
+
+        MDLabel:
+            id: progress_label
+            text: "Question x of y"
+            font_style: "Subtitle2"
+            halign: "center"
+            theme_text_color: "Secondary"
+
+        MDLabel:
+            id: question_label
+            text: "Question text will appear here"
+            font_style: "H6"
+            halign: "center"
+            theme_text_color: "Primary"
+            size_hint_y: None
+            height: self.texture_size[1] + dp(20)
+
+        MDRaisedButton:
+            text: "🔇 Mute Music"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.toggle_music()
+
+        Widget:
+            size_hint_y: None
+            height: dp(5) 
+
+        MDRaisedButton:
+            text: "🔊 Speak Question"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.speak_text(root.ids.question_label.text)
+
+        MDTextField:
+            id: user_input
+            hint_text: "Type your answer"
+            mode: "rectangle"
+            multiline: False
+
+        MDRaisedButton:
+            text: "Submit Answer"
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.check_answer(user_input.text)
