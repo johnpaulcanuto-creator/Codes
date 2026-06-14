@@ -1,0 +1,1027 @@
+:root {
+    /* Default Theme (Primary) */
+    --primary-color: #6c5ce7;
+    --primary-dark: #5649c0;
+    --secondary-color: #00cec9;
+    --accent-color: #fd79a8;
+    --light-color: #f5f6fa;
+    --dark-color: #2d3436;
+    --gray-color: #b2bec3;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+    --error-color: #d63031;
+    
+    --cell-size: 40px;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* New Theme Variables */
+body.theme-dark {
+    --primary-color: #4a4a4a;
+    --primary-dark: #333333;
+    --secondary-color: #666666;
+    --accent-color: #999999;
+    --light-color: #222222;
+    --dark-color: #f5f6fa; /* Invert for dark theme text */
+    --gray-color: #777777;
+    background-color: #1a1a1a;
+    color: var(--dark-color);
+}
+
+body.theme-light {
+    --primary-color: #f0f0f0;
+    --primary-dark: #e0e0e0;
+    --secondary-color: #cccccc;
+    --accent-color: #aaaaaa;
+    --light-color: #ffffff;
+    --dark-color: #333333;
+    --gray-color: #bbbbbb;
+    background-color: #f9f9f9;
+    color: var(--dark-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    color: var(--dark-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+}
+
+/* Startup Screen */
+.startup-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.startup-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.startup-content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 90%;
+    color: white;
+}
+
+.startup-screen h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.startup-screen .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.difficulty-selector {
+    margin: 1.5rem 0;
+}
+
+.difficulty-selector h3 {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.difficulty-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.difficulty-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.difficulty-btn.active {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.start-btn {
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem auto;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.settings-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Game Container */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 1rem;
+    background-color: white;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+}
+
+.game-header h1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.icon-btn:hover {
+    background-color: rgba(108, 92, 231, 0.1);
+}
+
+/* Game Stats */
+.game-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    background-color: var(--light-color);
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+
+.stat-item i {
+    color: var(--primary-color);
+}
+
+/* Sudoku Board */
+.sudoku-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.sudoku_board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 1px;
+    background-color: var(--gray-color);
+    border: 2px solid var(--dark-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    width: calc(var(--cell-size) * 9 + 8px);
+    height: calc(var(--cell-size) * 9 + 8px);
+}
+
+.sudoku_board .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.sudoku_board .cell.fix {
+    background-color: #f8f9fa;
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.sudoku_board .cell.border_h {
+    border-bottom: 2px solid var(--dark-color);
+}
+
+.sudoku_board .cell.border_v {
+    border-right: 2px solid var(--dark-color);
+}
+
+/* Reverted selection styles */
+.sudoku_board .cell.selected {
+    background-color: rgba(108, 92, 231, 0.1); /* Base selection color for all selected cells */
+}
+
+.sudoku_board .cell.selected.current {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.sudoku_board .cell.selected.group {
+    background-color: rgba(108, 92, 231, 0.05); /* Slightly different shade for the 3x3 group */
+}
+
+.sudoku_board .cell span.samevalue {
+    color: var(--secondary-color);
+}
+
+.sudoku_board .cell.notvalid,
+.sudoku_board .cell.selected.notvalid {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.sudoku_board .cell .note {
+    position: absolute;
+    font-size: 0.6rem;
+    color: var(--gray-color);
+    width: calc(100% / 3);
+    height: calc(100% / 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Killer Sudoku specific styles */
+.sudoku_board .cell.cage-border-top { border-top: 2px dashed var(--dark-color); }
+.sudoku_board .cell.cage-border-bottom { border-bottom: 2px dashed var(--dark-color); }
+.sudoku_board .cell.cage-border-left { border-left: 2px dashed var(--dark-color); }
+.sudoku_board .cell.cage-border-right { border-right: 2px dashed var(--dark-color); }
+
+.sudoku_board .cell .cage-sum {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.6em; /* Made smaller */
+    color: var(--primary-color); /* Changed to blue (primary color) */
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1px 3px;
+    border-radius: 3px;
+    z-index: 1; /* Ensure sum is above notes */
+}
+
+/* Highlight entire cage when selected */
+.sudoku_board .cell.selected.cage-highlight {
+    background-color: rgba(108, 92, 231, 0.15); /* Slightly darker than normal selected */
+}
+.sudoku_board .cell.selected.current.cage-highlight {
+    background-color: var(--primary-color); /* Keep current cell primary */
+}
+
+/* Number Pad */
+.number-pad {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.number-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.num-btn {
+    width: calc(20% - 0.5rem);
+    aspect-ratio: 1;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.num-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.num-btn.delete-btn {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.action-btn {
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.action-btn:first-child {
+    margin-right: 0.5rem;
+}
+
+.note-btn {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.note-btn.active {
+    background-color: var(--dark-color);
+    color: white;
+}
+
+.hint-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background-color: white;
+    z-index: 100;
+    transition: var(--transition);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.menu-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--light-color);
+}
+
+.menu-header h2 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 1rem 0;
+    flex-grow: 1;
+}
+
+.menu-list li {
+    margin-bottom: 0.5rem;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 1rem;
+    color: var(--dark-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition);
+    border-radius: 0;
+}
+
+.menu-btn:hover {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+}
+
+.menu-btn i {
+    width: 20px;
+    text-align: center;
+}
+
+/* New Settings Styles */
+.menu-section {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--light-color);
+}
+
+.menu-section:last-of-type {
+    border-bottom: none;
+}
+
+.menu-section h3 {
+    font-size: 1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.theme-picker {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.theme-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.theme-box.active {
+    border-color: var(--primary-color);
+}
+
+.theme-box.primary { background-color: #6c5ce7; }
+.theme-box.dark { background-color: #4a4a4a; }
+.theme-box.light { background-color: #f0f0f0; border: 1px solid #ccc; } /* Light theme needs a visible border */
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--gray-color);
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--dark-color);
+}
+
+.setting-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Reset Progress Button */
+.reset-progress-btn {
+    background-color: var(--error-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.reset-progress-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Confirmation Modal for Reset */
+#confirm_reset_modal .modal-content {
+    padding: 2rem;
+}
+#confirm_reset_modal h2 {
+    color: var(--error-color);
+}
+#confirm_reset_modal p {
+    margin-bottom: 1.5rem;
+}
+#confirm_reset_modal .modal-buttons {
+    justify-content: center;
+}
+
+
+/* Modal */
+.modal {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.modal.open {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 1001;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.modal.open .modal-content {
+    transform: translateY(0);
+}
+
+.modal h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.modal p {
+    margin-bottom: 1.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.modal-btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modal-btn.secondary {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.modal-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Instructions */
+.instructions {
+    margin: 1.5rem 0;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.step-number {
+    background-color: var(--primary-color);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    :root {
+        --cell-size: 50px;
+    }
+    
+    .app-container {
+        max-width: 600px;
+    }
+    
+    .sudoku_board .cell {
+        font-size: 1.5rem;
+    }
+    
+    .num-btn {
+        font-size: 1.5rem;
+    }
+    
+    .action-btn {
+        font-size: 1rem;
+    }
+}
+
+@media (max-height: 700px) {
+    :root {
+        --cell-size: 35px;
+    }
+    
+    .game-stats {
+        padding: 0.5rem;
+    }
+    
+    .number-pad {
+        padding: 0.5rem;
+    }
+    
+    .num-btn {
+        font-size: 1rem;
+    }
+    
+    .action-btn {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+#game_modes_modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.game-mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+    width: 100%;
+}
+
+.game-mode-btn {
+    padding: 1.2rem;
+    border: none;
+    border-radius: var(--border-radius);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background-color: var(--primary-color);
+}
+
+.game-mode-btn:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.coming-soon {
+    background-color: var(--light-color);
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.coming-soon i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+#close_game_modes {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    min-width: 80px;
+    align-self: center;
+}
+
+/* Symbol Legend - Landscape */
+.symbol-legend {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0.5rem auto 0.8rem;
+    padding: 0.5rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    max-width: 100%;
+    min-height: 50px;
+    align-items: center;
+}
+
+.symbol-legend .legend-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 50%;
+    margin: 0 2px;
+}
+
+.symbol-legend .legend-item:hover {
+    background-color: rgba(108, 92, 231, 0.1);
+    transform: scale(1.1);
+}
+
+/* Difficulty Modal Styles */
+#difficulty_modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.difficulty-btn-modal {
+    flex: 1;
+    padding: 0.8rem 0;
+    border: none;
+    border-radius: var(--border-radius);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    max-width: 120px;
+}
+
+.difficulty-btn-modal[data-level="easy"] { background-color: var(--success-color); }
+.difficulty-btn-modal[data-level="medium"] { background-color: var(--warning-color); }
+.difficulty-btn-modal[data-level="hard"] { background-color: var(--error-color); }
+.difficulty-btn-modal:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* Center Cancel Button */
+#close_difficulty {
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.2rem;
+    min-width: 80px;
+    align-self: center;
+}
+
+/* Symbol mode UI adjustments */
+.symbol-ui .symbol-legend {
+    display: flex;
+}
+
+.symbol-ui .number-pad .num-btn:not(.delete-btn) {
+    font-size: 1.8rem;
+}
+
+/* Game title with mode indicator */
+.mode-indicator {
+    font-size: 0.7rem;
+    display: block;
+    margin-top: -5px;
+    opacity: 0.7;
+}
+
+/* How to Play Modal - Specifics for mode instructions */
+.instructions-container {
+    width: 100%;
+}
+.instructions-container .instructions {
+    display: none; /* Hide all instruction sets by default */
+}
+.instructions-container .instructions.active {
+    display: block; /* Show active instruction set */
+}
+
+/* Leaderboard Modal Styling */
+#leaderboard_modal .modal-content {
+    padding: 1.5rem;
+}
+
+#leaderboard_modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+#leaderboard_modal h3 {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--light-color);
+    padding-bottom: 5px;
+}
+
+#leaderboard_modal h4 { /* Added for mode-difficulty sub-headers */
+    font-size: 1rem;
+    color: var(--dark-color);
+    margin-top: 0.8rem;
+    margin-bottom: 0.3rem;
+    text-align: left;
+    padding-left: 10px;
+}
+
+#leaderboard_modal .leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 1rem;
+}
+
+#leaderboard_modal .leaderboard-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--light-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#leaderboard_modal .leaderboard-list li:last-child {
+    border-bottom: none;
+}
+
+#leaderboard_modal .leaderboard-list li strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    width: 30px; /* Align rank numbers */
+    flex-shrink: 0;
+}
+
+#leaderboard_modal .leaderboard-list li span {
+    flex-grow: 1;
+    text-align: right;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+#leaderboard_modal .leaderboard-list li.placeholder-score {
+    color: var(--gray-color); /* Dim placeholder scores */
+    font-style: italic;
+}
+#leaderboard_modal .leaderboard-list li.placeholder-score strong {
+    color: var(--gray-color);
+}
+
+#leaderboard_modal .modal-buttons {
+    margin-top: 1.5rem;
+}
